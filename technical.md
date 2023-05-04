@@ -17,8 +17,7 @@
 
 ## 2. Project Overview
 
-The goal of the project is to create a database with <!--ajouter languages choisis -->[language we choose], also with the elements give by the company (Krug Champagne).
-
+The objective of [Krug Champagne project] is the objective is to minimize the loss of champagne during blending (4th step) by an algorithm.
 <!--ajouter détails plus tard -->
 
 ## 3. Solution
