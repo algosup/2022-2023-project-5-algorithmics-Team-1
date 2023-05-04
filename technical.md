@@ -1,66 +1,55 @@
-# 2022-2023 - PROJECT5 - ALGORITHMS & DATA STRUCTURE - TEAM 1
-# technical specification
-<details> 
-<summary style="text-decoration: underline; font-size:150%">📖 Table of contents:</summary>
+# Technical specification
 
-- [technical specification](#technical-specification)
-  - [1. Glossary](#1-glossary)
-  - [2. Project Overview](#2-project-overview)
-  - [3. Solution](#3-solution)
-  - [4. Development of the Solution](#4-development-of-the-solution)
-  - [5. Risks](#5-risks)
+<details> 
+<summary> 📖 Table of contents:</summary>
+
+- [Technical specification](#technical-specification)
+  - [Project Overview](#project-overview)
+  - [Development of the Solution](#development-of-the-solution)
+    - [Solution](#solution)
+      - [Development : How is it work ?](#development--how-is-it-work-)
+    - [Cost estimation](#cost-estimation)
+    - [Security](#security)
+  - [Risks](#risks)
+    - [Accessibility](#accessibility)
+    - [Success evaluation](#success-evaluation)
+  - [Ressources and references](#ressources-and-references)
+  - [Glosary](#glosary)
 
 </details>
 
-## 1. Glossary
-
-
-## 2. Project Overview
+## Project Overview
 
 The objective of [Krug Champagne project] is the objective is to minimize the loss of champagne during blending (4th step) by an algorithm.
 <!--ajouter détails plus tard -->
 
-## 3. Solution
+## Development of the Solution
+
+### Solution
 <!--a revoir -->
 We choose <!--language--> like language to create the data base of the company and help at the organisazion.
 
-## 4. Development of the Solution
+#### Development : How is it work ?
 
 
-## 5. Risks
-
-<!--a ajouté -->
-
-#### Client
-
-#### Goal of the project
-
-#### General description
-
-#### Team Members
-
-### Solution
-
-#### Descritpion
-
-#### How is it work ?
-
-### Further considereations
-
-#### Cost estimation
+### Cost estimation
 
 To make the project, we don't need to buy anything. We will use the tools that we already have.
 
-#### Security
+### Security
 
-#### Risks
+## Risks
 
-#### Accessibility
+<!--a ajouté -->
+
+### Accessibility
 
 ### Success evaluation
 
-### Ressources
+## Ressources and references
 
-#### References
+[1] [- Krug Website](https://www.krug.com/fr/la-maison-krug)
 
-[1] [Krug Website](https://www.krug.com/fr/la-maison-krug)
+
+## Glosary 
+
