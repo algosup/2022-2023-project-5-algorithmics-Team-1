@@ -48,7 +48,7 @@ To make the project, we don't need to buy anything. We will use the tools that w
 
 ## Ressources and references
 
-[1] [- Krug Website](https://www.krug.com/fr/la-maison-krug)
+- [Krug Website](https://www.krug.com/fr/la-maison-krug)
 
 
 ## Glosary 
