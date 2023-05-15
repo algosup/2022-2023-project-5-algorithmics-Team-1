@@ -22,7 +22,7 @@ class TestTank(unittest.TestCase):
         t2 = Tank("t2", 100, level=20)
         
         # Act
-        t1.move_to(t2, 10)
+        t1.move_unit_to(t2, 10)
         
         # Assert
         self.assertEqual(t1.level, 0)
@@ -38,7 +38,7 @@ class TestTank(unittest.TestCase):
         # t3 -> t7
         # t4 -> t6
         for s, e in zip(range(0, 5), range(8, 4, -1)):
-            tanks[s].move_to(tanks[e], tanks[s].level)
+            tanks[s].move_unit_to(tanks[e], tanks[s].level)
 
         # Assert
         self.assertIs(check_validity(tanks, 450), True)
