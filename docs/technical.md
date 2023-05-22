@@ -37,6 +37,9 @@ To make the project, we don't need to buy anything. We will use the tools that w
 
 ## 3.Risks
 
+[Risk doc](https://docs.google.com/spreadsheets/d/1c3TqdskpdIjxDfMc5kR791dv1CRFdnPDg-OVfnnxMEE/edit?usp=sharing)
+
+
 - champagne production slowed down
 - bad mixing so loss of wine
 - problem with the "site" so delay
