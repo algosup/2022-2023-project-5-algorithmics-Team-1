@@ -74,6 +74,24 @@ Our goal is to produce the closest result to the formula with the minimum number
 
 - 1st week :
   - [x] Have a good understanding of the project
-  - [ ] Begin functional
-  - [ ] Begin Technical
-  - [ ] Think about the algorithm
+  - [x] Begin functional
+  - [x] Begin Technical
+  - [x] Think about the algorithm
+  
+- 2st week : 
+  - [x] Continue functional
+  - [x] Continue Technical
+  - [x] Create "prototype"
+  - [x] Choose language that will be use in the project
+
+- 3st week : 
+  - [x] Finish functional
+  - [x] Continue Technical
+  - [x] Finish "prototype"
+  - [x] Begin developpement
+
+- 4st week : 
+  - [ ] Finish Technical
+  - [ ] Continue developpement
+  - [x] Add Unit test
+  - [ ] Begin template of Test Plan
