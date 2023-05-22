@@ -66,6 +66,7 @@ Our goal is to produce the closest result to the formula with the minimum number
 
 - [KPI](https://docs.google.com/spreadsheets/d/1ZRWA8Po5ukQrfNBqSlJqXsDi36qlor8FvcJwwS5w5YQ/edit?usp=sharing)
 - [Research](https://docs.google.com/spreadsheets/d/1MzKXtTQFc_RMM_4RxAdHMqwy1FwSMI8Ci9Mmv0MsT04/edit?usp=sharing)
+- [Mitigation Plan](https://docs.google.com/spreadsheets/d/1c3TqdskpdIjxDfMc5kR791dv1CRFdnPDg-OVfnnxMEE/edit#gid=0)
 
 
 #### Retro Planning
