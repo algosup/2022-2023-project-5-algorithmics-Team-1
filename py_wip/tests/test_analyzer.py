@@ -1,6 +1,5 @@
 import unittest
 
-from .utils import check_analyzer_validity
 from src.analyzer import ListAnalyzer, FormulaParser
 from src.tank import Tank
 
@@ -14,7 +13,7 @@ class TestAnalyzer(unittest.TestCase):
         analyzer = ListAnalyzer(listanalyzer)
         result = analyzer.golist()
         # Assert
-        self.assertTrue(check_analyzer_validity(result, expectresult), True)
+        self.assertEqual(result, expectresult)
 
 
     def test_formula(self):
@@ -25,7 +24,7 @@ class TestAnalyzer(unittest.TestCase):
         parser = FormulaParser(formula)
         result = parser.decompose()
         # Assert
-        self.assertTrue(check_analyzer_validity(result, expectresult), True)
+        self.assertEqual(result, expectresult)
 
 if __name__ == "__main__":
     unittest.main()
