@@ -14,3 +14,8 @@ class TestSolver(unittest.TestCase):
         solver.method(tanks)
         # Assert
         self.assertIs(check_validity(tanks, 450), True)
+
+
+
+if __name__ == "__main__":
+    unittest.main()
