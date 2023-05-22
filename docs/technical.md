@@ -7,9 +7,8 @@
   - [Project Overview](#project-overview)
   - [Development of the Solution](#development-of-the-solution)
     - [Solution](#solution)
-      - [Development : How is it work ?](#development--how-is-it-work-)
+    - [Development : How is it work ?](#development--how-is-it-work-)
     - [Cost estimation](#cost-estimation)
-    - [Security](#security)
   - [Risks](#risks)
     - [Accessibility](#accessibility)
     - [Success evaluation](#success-evaluation)
@@ -29,14 +28,12 @@ The objective of [Krug Champagne project] is the objective is to minimize the lo
 <!--a revoir -->
 We choose <!--language--> like language to create the data base of the company and help at the organisazion.
 
-#### Development : How is it work ?
+### Development : How is it work ?
 
 
 ### Cost estimation
 
 To make the project, we don't need to buy anything. We will use the tools that we already have.
-
-### Security
 
 ## Risks
 
@@ -44,12 +41,14 @@ To make the project, we don't need to buy anything. We will use the tools that w
 
 ### Accessibility
 
+
+
 ### Success evaluation
+
 
 ## Ressources and references
 
 - [Krug Website](https://www.krug.com/fr/la-maison-krug)
-
 
 ## Glosary 
 
