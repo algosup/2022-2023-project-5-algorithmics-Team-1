@@ -74,4 +74,4 @@ class Tank():
             raise ValueError(f"Not enough liquid available in tank {self} < {perc*100}% of {target}.")
 
         for liquid in self.liquids:
-            target.liquids.append(liquid / perc)
+            target.liquids.append(liquid % perc)
