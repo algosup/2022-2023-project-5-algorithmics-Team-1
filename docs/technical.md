@@ -19,17 +19,19 @@
 
 ## 1.Project Overview
 
-The objective of [Krug Champagne project] is the objective is to minimize the loss of champagne during blending (4th step) by an algorithm.
+The objective of Krug Champagne[^2] project is the objective is to minimize the loss of champagne during blending (4th step) by an algorithm.
 <!--ajouter détails plus tard -->
 
 ## 2.evelopment of the Solution
 
 ### 2_1.Solution
 <!--a revoir -->
-We choose <!--language--> like language to create the data base of the company and help at the organisazion.
+We choose [<!--language-->] like language to create the data base of the company and help at the organisazion.
 
 ### 2_2.Development : How is it work ?
 <img src="/docs/technical1.png">
+
+The formula was give by the Cellar master[^1].
 
 ### 2_3.Cost estimation
 
@@ -63,3 +65,5 @@ They have access to a Local interface.
 
 ## 5.Glosary 
 
+[^1]:Cellar master : it is the person who makes the wine or the champagne.
+[^2]: Krug Champagne : customer and company of champaign.
