@@ -53,7 +53,7 @@ To make the project, we don't need to buy anything. We will use the tools that w
 
 ### 3_1.Accessibility
 
-They have access to a Local interface.<!--a ajouté -->
+They have access to a Local interface.<!--a ajouté : With two places where you can enter values, one for the mixture and another for the formula.-->
 
 ### 3_2.Success evaluation
 
