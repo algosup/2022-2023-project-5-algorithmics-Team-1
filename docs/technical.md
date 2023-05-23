@@ -5,7 +5,7 @@
 
 - [Technical specification](#technical-specification)
   - [1.Project Overview](#1project-overview)
-  - [2.evelopment of the Solution](#2evelopment-of-the-solution)
+  - [2.Development of the Solution](#2development-of-the-solution)
     - [2\_1.Solution](#2_1solution)
     - [2\_2.Development : How is it work ?](#2_2development--how-is-it-work-)
     - [2\_3.Cost estimation](#2_3cost-estimation)
@@ -19,10 +19,10 @@
 
 ## 1.Project Overview
 
-The objective of Krug Champagne[^2] project is the objective is to minimize the loss of champagne during blending (4th step) by an algorithm.
+The objective of Krug Champagne[^2] project is to minimize the loss of champagne during blending (4th step) by an algorithm.
 <!--ajouter détails plus tard -->
 
-## 2.evelopment of the Solution
+## 2.Development of the Solution
 
 ### 2_1.Solution
 <!--a revoir -->
@@ -31,7 +31,7 @@ We choose [<!--language-->] like language to create the data base of the company
 ### 2_2.Development : How is it work ?
 <img src="/docs/technical1.png">
 
-The formula was give by the Cellar master[^1].
+The formula was given by the Cellar master[^1].
 
 ### 2_3.Cost estimation
 
@@ -53,7 +53,7 @@ To make the project, we don't need to buy anything. We will use the tools that w
 
 ### 3_1.Accessibility
 
-They have access to a Local interface.
+They have access to a Local interface.<!--a ajouté -->
 
 ### 3_2.Success evaluation
 
