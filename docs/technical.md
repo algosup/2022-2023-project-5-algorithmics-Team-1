@@ -29,7 +29,7 @@ The objective of [Krug Champagne project] is the objective is to minimize the lo
 We choose <!--language--> like language to create the data base of the company and help at the organisazion.
 
 ### 2_2.Development : How is it work ?
-<img src="">
+<img src="/docs/technical1.png">
 
 ### 2_3.Cost estimation
 
