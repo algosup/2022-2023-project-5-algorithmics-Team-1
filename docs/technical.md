@@ -29,13 +29,16 @@ The objective of [Krug Champagne project] is the objective is to minimize the lo
 We choose <!--language--> like language to create the data base of the company and help at the organisazion.
 
 ### 2_2.Development : How is it work ?
-
+<img src="">
 
 ### 2_3.Cost estimation
 
 To make the project, we don't need to buy anything. We will use the tools that we already have.
 
 ## 3.Risks
+
+[Risk doc](https://docs.google.com/spreadsheets/d/1c3TqdskpdIjxDfMc5kR791dv1CRFdnPDg-OVfnnxMEE/edit?usp=sharing)
+
 
 - champagne production slowed down
 - bad mixing so loss of wine
