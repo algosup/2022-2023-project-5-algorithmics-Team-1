@@ -1,30 +1,31 @@
 import unittest
 
-from src.analyzer import ListAnalyzer, FormulaParser
-from src.tank import Tank
+from src.analyzer import ListParser, FormulaParser
 
 class TestAnalyzer(unittest.TestCase):
 
-    def test_analyzer(self):
+    def test_listparser(self):
         # Arrange
-        listanalyzer = "10/100,t1+20/100,t2+30/100,t3"
-        expectresult = [('10', '100', 't1'), ('20', '100', 't2'), ('30', '100', 't3')]
+        listanalyzer = "10.45/100,t1+20/100.55,t2+30.11111/100.0987654321,t3"
+        expected = [(10.45, 100.0, "t1"), (20.0, 100.55, "t2"), (30.11111, 100.0987654321, "t3")]
+
         # Act
-        analyzer = ListAnalyzer(listanalyzer)
-        result = analyzer.golist()
+        analyzer = ListParser(listanalyzer)
+        result = analyzer.decompose()
+
         # Assert
-        self.assertEqual(result, expectresult)
+        self.assertEqual(result, expected)
 
 
-    def test_formula(self):
+    def test_formulaparser(self):
         # Arrange
-        formula = "50%t1+20%t2+30%t3"
-        expectresult = [(50.0, 't1'), (20.0, 't2'), (30.0, 't3')]
+        formula = "50.2%t1+20%t2+30.0%t3"
+        expected = [(50.2, "t1"), (20.0, "t2"), (30.0, "t3")]
         # Act
         parser = FormulaParser(formula)
         result = parser.decompose()
         # Assert
-        self.assertEqual(result, expectresult)
+        self.assertEqual(result, expected)
 
 if __name__ == "__main__":
     unittest.main()
