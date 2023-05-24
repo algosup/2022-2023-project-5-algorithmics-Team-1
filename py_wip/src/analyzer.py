@@ -18,10 +18,16 @@ class FormulaParser(DefaultParser):
 
     def decompose(self) -> list[tuple[float, str]]:
         output: list[tuple[float, str]] = []
+        check_sum = 0
         addends = self.formula.split('+')
         for addend in addends:
             percentage, tank_name = addend.split('%')
             output.append((float(percentage), tank_name))
+            check_sum += float(percentage)
+
+        if check_sum != 100.0:
+            raise ValueError(f"Sum of percentages is not 100%: {check_sum}%")
+
         return output
 
 class ListParser(DefaultParser):

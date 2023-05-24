@@ -19,8 +19,8 @@ class TestAnalyzer(unittest.TestCase):
 
     def test_formulaparser(self):
         # Arrange
-        formula = "50.2%t1+20%t2+30.0%t3"
-        expected = [(50.2, "t1"), (20.0, "t2"), (30.0, "t3")]
+        formula = "50.2%t1+19.8%t2+30.0%t3"
+        expected = [(50.2, "t1"), (19.8, "t2"), (30.0, "t3")]
         # Act
         parser = FormulaParser(formula)
         result = parser.decompose()
