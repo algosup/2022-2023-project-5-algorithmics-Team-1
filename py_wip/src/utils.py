@@ -68,15 +68,15 @@ def get_tanks_with_nodes(tanks: list[Tank]) -> list[Tank]:
     """Returns only a list of tanks that have nodes."""
     return [tank for tank in tanks if len(tank.nodes) > 0]
 
-def aggregate(parsed_formula: list[tuple[float, str]], tanks: list[Tank]) -> list[tuple[float, Tank]]:
+def aggregate(tanks: list[Tank], parsed_formula: list[tuple[float, str]]) -> list[tuple[float, Tank]]:
     """Aggregates the parsed formula with the list of tanks provided.
 
     Parameters
     -------------
-    parsed_formula: `list[tuple[float, str]]`
-        The formula already parsed, ready to use.
     tanks: `list[Tank]`
         The list of tanks to use.
+    parsed_formula: `list[tuple[float, str]]`
+        The formula already parsed, ready to use.
 
     Returns
     ----------
@@ -108,6 +108,12 @@ def theoretical_max(tanks: list[Tank], formula: str) -> float:
     """
     parsed_formula = FormulaParser(formula).decompose()
 
-    zip_tanks = aggregate(parsed_formula, tanks)
+    zip_tanks = aggregate(tanks, parsed_formula)
 
     return min([tank.level / (perc / 100) for perc, tank in zip_tanks])
+
+def remove_useless_tanks(tanks: list[Tank], formula: str) -> None:
+    """Removes the tanks that are useless, i.e. the ones that are filled and not in the formula."""
+    for tank in tanks:
+        if tank.level != 0 and tank.name not in [name for _, name in FormulaParser(formula).decompose()]:
+            tanks.remove(tank)
