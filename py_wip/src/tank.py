@@ -17,6 +17,7 @@ class Tank():
     liquids: list[Liquid] = []
     max: float
     name: str = "t0"
+    nodes: list["Tank"] = []
 
     def __init__(self, name: str, max: float, level: float) -> None:
         if level > max:
