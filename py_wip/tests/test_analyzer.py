@@ -21,9 +21,11 @@ class TestAnalyzer(unittest.TestCase):
         # Arrange
         formula = "50.2%t1+19.8%t2+30.0%t3"
         expected = [(50.2, "t1"), (19.8, "t2"), (30.0, "t3")]
+
         # Act
         parser = FormulaParser(formula)
         result = parser.decompose()
+
         # Assert
         self.assertEqual(result, expected)
 
