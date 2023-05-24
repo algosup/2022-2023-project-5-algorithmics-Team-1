@@ -1,6 +1,6 @@
 import unittest
 
-from .utils import check_validity
+from .helper import check_validity
 from src.tank import Tank
 
 class TestTank(unittest.TestCase):
