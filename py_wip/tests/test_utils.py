@@ -1,11 +1,12 @@
 import unittest
 
+from src.liquid import Liquid
 from src.tank import Tank
-from src.utils import _number_to_percentage, _percentage_to_number, theoretical_max , get_min_level, get_name_from_tanks, create_nodes, get_tanks_with_nodes, aggregate ,remove_useless_tanks #get_tank_by_name,
+from src.utils import _number_to_percentage, _percentage_to_number, check_tank_formula, theoretical_max , get_min_level, get_name_from_tanks, create_nodes, get_tanks_with_nodes, aggregate ,remove_useless_tanks
 
 class TestUtils(unittest.TestCase):
 
-    def test_set(self):
+    def test_theorical_max(self):
         # Arrange
         tanks = [
             Tank("t1", 100, level=100),
@@ -21,7 +22,7 @@ class TestUtils(unittest.TestCase):
         # Assert
         self.assertEqual(maximum, 150)
 
-    def test__number_to_percentage(self):
+    def test_number_to_percentage(self):
         # Arrange
         number = 90
         total = 180
@@ -32,7 +33,7 @@ class TestUtils(unittest.TestCase):
         # Assert
         self.assertEqual(percentage, 50)
 
-    def test__percentage_to_number(self):
+    def test_percentage_to_number(self):
         # Arrange
         percentage = 50
         total = 180
@@ -141,6 +142,23 @@ class TestUtils(unittest.TestCase):
 
         # Assert
         self.assertEqual(list, [tanks[0],tanks[1], tanks[2],tanks[3], tanks[4], tanks[6]])
+
+    def test_check_tank_formula(self):
+        # Arrange
+        tank = Tank("t1", 100, 0)
+        tank.liquids = [
+            Liquid("t1", 25),
+            Liquid("t2", 50),
+            Liquid("t3", 12.5),
+            Liquid("t4", 12.5),
+        ]
+        formula = "25%t1+50%t2+12.5%t3+12.5%t4"
+
+        # Act
+        result = check_tank_formula(tank, formula)
+
+        # Assert
+        self.assertEqual(result, True)
 
 if __name__ == "__main__":
     unittest.main()

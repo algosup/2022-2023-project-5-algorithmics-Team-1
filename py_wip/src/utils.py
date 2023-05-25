@@ -62,7 +62,7 @@ def create_nodes(tanks: list[Tank]) -> None:
 def print_tanks_nodes(tanks: list[Tank]) -> None:
     """A debug method that prints each tanks with their shortnied nodes name."""
     for tank in tanks:
-        print(f'{tank} -> {get_name_from_tanks(tank.nodes)}')
+        print(f"{tank} -> {get_name_from_tanks(tank.nodes)}")
 
 def get_tanks_with_nodes(tanks: list[Tank]) -> list[Tank]:
     """Returns only a list of tanks that have nodes."""
@@ -118,3 +118,19 @@ def remove_useless_tanks(tanks: list[Tank], formula: str) -> None:
     for tank in tanks.copy():
         if tank.level != 0 and not (tank.name in names):
             tanks.remove(tank)
+
+def check_tank_formula(tank: Tank, formula: str, epsilon: float = 0.1) -> bool:
+    parsed_formula = FormulaParser(formula).decompose()
+    names = [name for _, name in parsed_formula]
+
+    for liquid in tank.liquids:
+        if not liquid.name in names:
+            raise ValueError(f"Error in tank: {tank}, contains liquid {liquid}")
+
+        index = names.index(liquid.name)
+        expected_perc = parsed_formula[index][0]
+        current_perc = tank.level * liquid.level / 100
+        if abs(current_perc - expected_perc) > epsilon:
+            raise ValueError(f"Error in tank: {tank}, liquid {liquid} | curr:{current_perc} != exp:{expected_perc}")
+
+    return True
