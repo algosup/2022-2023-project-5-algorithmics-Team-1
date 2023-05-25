@@ -145,12 +145,12 @@ class TestUtils(unittest.TestCase):
 
     def test_check_tank_formula(self):
         # Arrange
-        tank = Tank("t1", 100, 0)
+        tank = Tank("t1", 200, 0)
         tank.liquids = [
-            Liquid("t1", 25),
-            Liquid("t2", 50),
-            Liquid("t3", 12.5),
-            Liquid("t4", 12.5),
+            Liquid("t1", 50),
+            Liquid("t2", 100),
+            Liquid("t3", 25),
+            Liquid("t4", 25),
         ]
         formula = "25%t1+50%t2+12.5%t3+12.5%t4"
 

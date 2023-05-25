@@ -125,12 +125,12 @@ def check_tank_formula(tank: Tank, formula: str, epsilon: float = 0.1) -> bool:
 
     for liquid in tank.liquids:
         if not liquid.name in names:
-            raise ValueError(f"Error in tank: {tank}, contains liquid {liquid}")
+            return False
 
         index = names.index(liquid.name)
         expected_perc = parsed_formula[index][0]
-        current_perc = tank.level * liquid.level / 100
+        current_perc = liquid.level * 100 / tank.level
         if abs(current_perc - expected_perc) > epsilon:
-            raise ValueError(f"Error in tank: {tank}, liquid {liquid} | curr:{current_perc} != exp:{expected_perc}")
+            return False
 
     return True
