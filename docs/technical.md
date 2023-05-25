@@ -14,7 +14,7 @@
     - [3\_1.Accessibility](#3_1accessibility)
     - [3\_2.Success evaluation](#3_2success-evaluation)
   - [4.More about the client :](#4more-about-the-client-)
-  - [Glosary](#glosary)
+  - [Glossary](#glossary)
 
 </details>
 
@@ -60,7 +60,7 @@ They have access to a Local interface.<!--a ajouté : With two places where you 
 
 ### 3_2.Success evaluation
 
-<!--a voir plus tard -->
+<!-- renvoie des données (les mixes les plus probables : pourcentage de tankn -> dans tankn2 -->
 
 ## 4.More about the client :
 
@@ -73,6 +73,6 @@ It also offers Grande Cuvée champagne (171st edition), each with a unique histo
 
 - [Their Website](https://www.krug.com/fr/la-maison-krug)
 
-## Glosary 
+## Glossary 
 
 [^1]:Cellar master : it is the person who makes the wine or the champagne.
