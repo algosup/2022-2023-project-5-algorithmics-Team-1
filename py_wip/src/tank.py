@@ -25,11 +25,12 @@ class Tank():
 
         self.name = name
         self.max = max
-        self.liquids = [Liquid(name, level)]
+        if level: 
+            self.liquids = [Liquid(name, level)]
 
     @property
     def level(self) -> float:
-        return sum([liquid.level for liquid in self.liquids])
+        return sum([liquid.level for liquid in self.liquids]) if self.liquids else 0
 
     def __repr__(self) -> str:
         return self.__str__()

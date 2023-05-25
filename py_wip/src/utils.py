@@ -1,4 +1,4 @@
-from typing import Callable
+from typing import Callable, Optional
 
 from src.analyzer import FormulaParser
 from src.tank import Tank
@@ -119,7 +119,10 @@ def remove_useless_tanks(tanks: list[Tank], formula: str) -> None:
         if tank.level != 0 and not (tank.name in names):
             tanks.remove(tank)
 
-def check_tank_formula(tank: Tank, formula: str, epsilon: float = 0.1) -> bool:
+def check_tank_formula(tank: Tank, formula: str, epsilon: float = 0.1) -> Optional[bool]:
+    if not tank.liquids:
+        return None
+
     parsed_formula = FormulaParser(formula).decompose()
     names = [name for _, name in parsed_formula]
 
