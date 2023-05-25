@@ -114,6 +114,7 @@ def theoretical_max(tanks: list[Tank], formula: str) -> float:
 
 def remove_useless_tanks(tanks: list[Tank], formula: str) -> None:
     """Removes the tanks that are useless, i.e. the ones that are filled and not in the formula."""
-    for tank in tanks:
-        if tank.level != 0 and tank.name not in [name for _, name in FormulaParser(formula).decompose()]:
+    names = [name for _, name in FormulaParser(formula).decompose()]
+    for tank in tanks.copy():
+        if tank.level != 0 and not (tank.name in names):
             tanks.remove(tank)
