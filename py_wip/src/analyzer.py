@@ -5,18 +5,18 @@ class DefaultParser():
     def __init__(self, formula) -> None:
         self.formula = formula
 
-    def decompose(self) -> Any:
+    def parse(self) -> Any:
         ...
 
     def __repr__(self) -> str:
         return self.__str__()
 
     def __str__(self) -> str:
-        return f"{self.formula}/{self.decompose()}"
+        return f"{self.formula}/{self.parse()}"
 
 class FormulaParser(DefaultParser):
 
-    def decompose(self) -> list[tuple[float, str]]:
+    def parse(self) -> list[tuple[float, str]]:
         output: list[tuple[float, str]] = []
         check_sum = 0
         addends = self.formula.split('+')
@@ -32,7 +32,7 @@ class FormulaParser(DefaultParser):
 
 class ListParser(DefaultParser):
 
-    def decompose(self) -> list[tuple[float, float, str]]:
+    def parse(self) -> list[tuple[float, float, str]]:
         output = []
         addends = self.formula.split('+')
         for addend in addends:

@@ -1,5 +1,6 @@
 import unittest
 
+from src.analyzer import FormulaParser
 from src.liquid import Liquid
 from src.tank import Tank
 from src.utils import _number_to_percentage, _percentage_to_number, check_tank_formula, theoretical_max , get_min_level, get_name_from_tanks, create_nodes, get_tanks_with_nodes, aggregate ,remove_useless_tanks
@@ -15,9 +16,10 @@ class TestUtils(unittest.TestCase):
             Tank("t4", 80, level=80),
         ]
         formula = "25%t1+50%t2+12.5%t3+12.5%t4"
+        parsed_formula = FormulaParser(formula).parse()
 
         # Act
-        maximum = theoretical_max(tanks, formula)
+        maximum = theoretical_max(tanks, parsed_formula)
 
         # Assert
         self.assertEqual(maximum, 150)
@@ -136,9 +138,11 @@ class TestUtils(unittest.TestCase):
             Tank("t8", 180, level=180),
         ]
         formula = "25%t1+50%t2+25%t3"
+        parsed_formula = FormulaParser(formula).parse()
+
         # Act
         list = tanks.copy()
-        remove_useless_tanks(list, formula)
+        remove_useless_tanks(list, parsed_formula)
 
         # Assert
         self.assertEqual(list, [tanks[0],tanks[1], tanks[2],tanks[3], tanks[4], tanks[6]])
@@ -153,9 +157,10 @@ class TestUtils(unittest.TestCase):
             Liquid("t4", 25),
         ]
         formula = "25%t1+50%t2+12.5%t3+12.5%t4"
+        parsed_formula = FormulaParser(formula).parse()
 
         # Act
-        result = check_tank_formula(tank, formula)
+        result = check_tank_formula(tank, parsed_formula)
 
         # Assert
         self.assertEqual(result, True)

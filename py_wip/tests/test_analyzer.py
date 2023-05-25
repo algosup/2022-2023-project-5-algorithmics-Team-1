@@ -11,7 +11,7 @@ class TestAnalyzer(unittest.TestCase):
 
         # Act
         analyzer = ListParser(listanalyzer)
-        result = analyzer.decompose()
+        result = analyzer.parse()
 
         # Assert
         self.assertEqual(result, expected)
@@ -24,7 +24,7 @@ class TestAnalyzer(unittest.TestCase):
 
         # Act
         parser = FormulaParser(formula)
-        result = parser.decompose()
+        result = parser.parse()
 
         # Assert
         self.assertEqual(result, expected)

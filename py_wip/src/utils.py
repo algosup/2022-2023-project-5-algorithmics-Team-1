@@ -91,7 +91,7 @@ def aggregate(tanks: list[Tank], parsed_formula: list[tuple[float, str]]) -> lis
         for perc, tank_name in parsed_formula
     ]
 
-def theoretical_max(tanks: list[Tank], formula: str) -> float:
+def theoretical_max(tanks: list[Tank], parsed_formula: list[tuple[float, str]]) -> float:
     """Calculates the maximum theoretical quantity based on the formula and the list of tanks provided.
 
     Parameters
@@ -106,32 +106,33 @@ def theoretical_max(tanks: list[Tank], formula: str) -> float:
     `float`
         The maximum theoretical quantity.
     """
-    parsed_formula = FormulaParser(formula).decompose()
-
     zip_tanks = aggregate(tanks, parsed_formula)
 
     return min([tank.level / (perc / 100) for perc, tank in zip_tanks])
 
-def remove_useless_tanks(tanks: list[Tank], formula: str) -> None:
+def remove_useless_tanks(tanks: list[Tank], parsed_formula: list[tuple[float, str]]) -> None:
     """Removes the tanks that are useless, i.e. the ones that are filled and not in the formula."""
-    names = [name for _, name in FormulaParser(formula).decompose()]
+    names = [name for _, name in parsed_formula]
     for tank in tanks.copy():
         if tank.level != 0 and not (tank.name in names):
             tanks.remove(tank)
 
-def check_tank_formula(tank: Tank, formula: str, epsilon: float = 0.1) -> Optional[bool]:
+def get_perc_from_name(name: str, parsed_formula: list[tuple[float, str]]) -> float:
+    """Returns the percentage of the tank in the formula."""
+    return [perc for perc, fname in parsed_formula if fname == name][0]
+
+def check_tank_formula(tank: Tank, parsed_formula: list[tuple[float, str]], epsilon: float = 0.1) -> Optional[bool]:
+    """Checks if each liquids in the tank are in the formula and if their percentage are correct."""
     if not tank.liquids:
         return None
 
-    parsed_formula = FormulaParser(formula).decompose()
     names = [name for _, name in parsed_formula]
 
     for liquid in tank.liquids:
         if not liquid.name in names:
             return False
 
-        index = names.index(liquid.name)
-        expected_perc = parsed_formula[index][0]
+        expected_perc = get_perc_from_name(liquid.name, parsed_formula)
         current_perc = liquid.level * 100 / tank.level
         if abs(current_perc - expected_perc) > epsilon:
             return False
