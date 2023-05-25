@@ -32,6 +32,7 @@ We choose [<!--language surement C#-->] like language to create the data base of
 The tanks cannot be half full. They must be either empty or completely full.
 <!--they would a total of 400 wines, each embodying the individuality of a specific parcel.-->
 ### 2_2.The Complexity
+<!--voir quand il y aura solver-->
 
 ### 2_3.Development : How is it work ?
 <img src="/docs/technical1.png">
@@ -60,6 +61,7 @@ They have access to a Local interface.<!--a ajouté : With two places where you 
 
 ### 3_2.Success evaluation
 
+The final goal of our project would be to render at least: a code that returns data (the most likely mixes: percentage of tank this number -> in tank that number).
 <!-- renvoie des données (les mixes les plus probables : pourcentage de tankn -> dans tankn2 -->
 
 ## 4.More about the client :
@@ -69,7 +71,6 @@ The client is the House Krug Champagne, conceptor of champagne since 1843. Based
 Krug has several labels that testify to the quality of its champagnes. One of the most prestigious labels that Krug has is "Champagne de Prestige", which designates the most upmarket and exceptional champagnes.
 
 It also offers Grande Cuvée champagne (171st edition), each with a unique history and individuality of a specific parcel.
-
 
 - [Their Website](https://www.krug.com/fr/la-maison-krug)
 
