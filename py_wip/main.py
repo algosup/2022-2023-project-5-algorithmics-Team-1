@@ -3,7 +3,7 @@ import random
 from src.analyzer import FormulaParser
 from src.liquid import Liquid
 from src.tank import Tank
-from src.utils import check_tank_formula, create_nodes, get_empty_tanks, get_largest_tank, get_perc_from_name, get_tanks_with_nodes, print_tanks_nodes, remove_useless_tanks, theoretical_max
+from src.utils import check_tank_formula, create_nodes, get_empty_tanks, get_filled_tanks, get_largest_tank, get_perc_from_name, get_tanks_with_nodes, print_tanks_nodes, remove_useless_tanks, theoretical_max
 
 N_TANKS = 10
 
@@ -33,30 +33,45 @@ if __name__ == "__main__":
 
     # Create nodes for each tank
     create_nodes(tanks)
-    print_tanks_nodes(tanks)
+    
+    def next_process(empty_tanks: list[Tank], largest_tank: Tank):
+        new_empty = empty_tanks
+        new_empty.remove(largest_tank)
+        if not new_empty:
+            new_empty = get_filled_tanks(tanks)
+            print("EMPTY TANKS", new_empty)
+        process(new_empty)
 
     def process(empty_tanks: list[Tank]):
+        print("PROCESSING CALLED")
         global max_blend
         try:
             largest_tank = get_largest_tank(empty_tanks)
         except ValueError:
+            print("EXIT")
             return
-        print(f"Looking for the largest empty tank: {largest_tank.max}")
         if largest_tank.max <= max_blend:
-            for tank in get_tanks_with_nodes(tanks):
-                tank.move_unit_to(largest_tank, get_perc_from_name(tank.name, PARSED_FORMULA))
-                print(f"{tank.name} -> {largest_tank.name} ({get_perc_from_name(tank.name, PARSED_FORMULA)}%)")
-            max_blend -= largest_tank.max
-            print(f"Champagne left to find space: {max_blend}L")
+            if largest_tank.level == 0:
+                print(f"LARGEST TANK IS EMPTY: {largest_tank}")
+                for tank in get_tanks_with_nodes(tanks):
+                    units = get_perc_from_name(tank.name, PARSED_FORMULA) / 100 * largest_tank.max
+                    tank.move_unit_to(largest_tank, units)
+                print("LARGEST FILLED",largest_tank)
+
+                max_blend -= largest_tank.max
+                print(f"Champagne left to find space: {max_blend}L")
+                next_process(empty_tanks, largest_tank)
+            else:
+                print("LARGEST TANK IS NOT EMPTY")
+
         else:
-            empty_tanks.remove(largest_tank)
-            if not empty_tanks:
-                print("No more tanks to fill")
-                return
-            process(empty_tanks)
+            next_process(empty_tanks, largest_tank)
+
 
     print(f"Champagne left to find space: {max_blend}L")
     process(get_empty_tanks(tanks))
+    
+    print(tanks)
 
     # Check formula for each tank
     print([check_tank_formula(tank, PARSED_FORMULA) for tank in tanks])
