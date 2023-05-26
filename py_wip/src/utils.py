@@ -86,7 +86,7 @@ def get_empty_tanks(tanks: list[Tank]) -> list[Tank]:
     return [tank for tank in tanks if tank.level == 0]
 
 def get_filled_tanks(tanks: list[Tank]) -> list[Tank]:
-    return [tank for tank in tanks if tank.level > 0]
+    return [tank for tank in tanks if tank.level > 0 and tank.level < tank.max]
 
 def aggregate(tanks: list[Tank], parsed_formula: list[tuple[float, str]]) -> list[tuple[float, Tank]]:
     """Aggregates the parsed formula with the list of tanks provided.
