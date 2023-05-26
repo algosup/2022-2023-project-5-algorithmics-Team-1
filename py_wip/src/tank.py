@@ -13,11 +13,9 @@ class Tank():
         The maximum level of the tank.
     name: `str`
         The name of the tank.
+    nodes: List[:class:`Tank`]
+        The nodes of the tank.
     """
-    liquids: list[Liquid] = []
-    max: float
-    name: str = "t0"
-    nodes: list["Tank"] = []
 
     def __init__(self, name: str, max: float, level: float) -> None:
         if level > max:
@@ -25,8 +23,8 @@ class Tank():
 
         self.name = name
         self.max = max
-        if level: 
-            self.liquids = [Liquid(name, level)]
+        self.nodes = []
+        self.liquids = [Liquid(name, level)] if level else []
 
     @property
     def level(self) -> float:
