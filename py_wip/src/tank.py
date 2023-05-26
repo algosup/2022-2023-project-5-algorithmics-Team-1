@@ -48,7 +48,8 @@ class Tank():
         level: `float`
             The level of liquid to move.
         """
-
+        if level < 0:
+            raise ValueError(f"Cannot move negative amount of liquid {level}.")
         if (target.max - target.level) < level:
             raise ValueError(f"Not enough space available in tank {target} < {level}.")
 

@@ -16,6 +16,33 @@ class TestTank(unittest.TestCase):
         self.assertEqual(t1.max, 100)
         self.assertEqual(t1.name, "t1")
 
+    def test_set_negative(self):
+        # Arrange
+        t1 = Tank("t1", 100, level=-10)
+
+        # Act
+
+        # Assert
+        self.assertEqual(t1.level, -10)
+        self.assertEqual(t1.max, 100)
+        self.assertEqual(t1.name, "t1")
+
+    def test_set_over_max(self):
+        # Arrange
+
+        # Act
+
+        # Assert
+        self.assertRaises(ValueError, Tank,"t1", 100, level=210)
+
+    def test_set_character(self):
+            # Arrange
+
+            # Act
+
+            # Assert
+            self.assertRaises(TypeError, Tank,"t1", 100, level="a")
+
     def test_level(self):
         # Arrange
         t1 = Tank("t1", 100, level=10)
@@ -27,6 +54,32 @@ class TestTank(unittest.TestCase):
         # Assert
         self.assertEqual(t1.level, 0)
         self.assertEqual(t2.level, 30)
+
+    def test_level_negative(self):
+        # Arrange
+        t1 = Tank("t1", 100, level=10)
+        t2 = Tank("t2", 100, level=20)
+        
+        # Act
+        
+        # Assert
+        self.assertRaises(ValueError,t1.move_unit_to,t2, -10)
+    
+    def test_level_character(self):
+        # Arrange
+        t1 = Tank("t1", 100, level=10)
+        t2 = Tank("t2", 100, level=20)
+        
+        # Act
+        
+        # Assert
+        self.assertRaises(TypeError,t1.move_unit_to,t2, "a")
+
+    def test_move_unit_to__not_enough_in_self(self):
+        self.assertRaises(ValueError, Tank("t1", 100, level=10).move_unit_to, Tank("t2", 100, level=0), 20)
+        
+    def test_move_unit_to__no_space_in_target(self):
+        self.assertRaises(ValueError, Tank("t1", 100, level=10).move_unit_to, Tank("t2", 100, level=100), 10)
 
     def test_validity(self):
         # Arrange
