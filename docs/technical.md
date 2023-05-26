@@ -7,7 +7,10 @@
   - [1.Project Overview](#1project-overview)
   - [2.Development of the Solution](#2development-of-the-solution)
     - [2\_1.Solution](#2_1solution)
-    - [2\_2.The Complexity](#2_2the-complexity)
+    - [2\_2.Technical constraints](#2_2technical-constraints)
+      - [The tanks](#the-tanks)
+      - [The Complexity](#the-complexity)
+      - [The language choose](#the-language-choose)
     - [2\_3.Development : How is it work ?](#2_3development--how-is-it-work-)
     - [2\_4.Cost estimation](#2_4cost-estimation)
   - [3.Risks](#3risks)
@@ -31,8 +34,37 @@ We choose [<!--language surement C#-->] like language to create the data base of
 
 The tanks cannot be half full. They must be either empty or completely full.
 <!--they would a total of 400 wines, each embodying the individuality of a specific parcel.-->
-### 2_2.The Complexity
-<!--voir quand il y aura solver-->
+
+### 2_2.Technical constraints
+#### The tanks
+The tanks cannot be half full. They must be either empty or completely full. This constraint must be taken into account with great importance, as oxidation of the wine must be avoided.
+
+#### The Complexity
+The most important thing to consider throughout the project is to have O(1), O(logn), O(n). 
+The values to be avoided absolutely for the efficiency of the program, are O(nlogn), O(n^2), O(2^n), O(n!).
+
+#### The language choose 
+<!--3.14 de vitesse d'execution 11 ème plus rapide -->
+
+|Language |Time | Energy | High level language ou Low level language | interpreted[^3] or compiled[^2]|
+|:-----: |:----:|:----:|:----:|:----:|
+| C |1.00| 1.00 | high | compiled |
+| Rust |1.04| 1.03| high | compiled |
+| C++ | 1.56 | 1.34 | high | compiled |
+| ... | ... | ... | ... | ... |
+| GO  | 2.83 | 3.23 | high | compiled |
+| ... | ... | ... | ... | ... |
+| C# | 3.14 | 3.14| high | compiled |
+| ... | ... | ... | ... | ... |
+| F# | 6.30 | 4.13| high | interpreted |
+| Javascript | 6.52 | 4.45| high | interpreted |
+| ... | ... | ... | ... | ... |
+| PHP | 27.64 | 29.30| high | interpreted |
+| ... | ... | ... | ... | ... |
+| Python | 71.90 | 75.88| high | interpreted |
+
+
+
 
 ### 2_3.Development : How is it work ?
 <img src="/docs/technical1.png">
@@ -76,4 +108,10 @@ It also offers Grande Cuvée champagne (171st edition), each with a unique histo
 
 ## Glossary 
 
-[^1]:Cellar master : it is the person who makes the wine or the champagne.
+[^1]:Cellar master : it is the person who makes the wine or the champagne.<br>
+
+[^2]: compiled : Compiled languages are converted directly into machine code that the processor can execute. As a result, they tend to be faster and more efficient to execute than interpreted languages. They also give the developer more control over hardware aspects, like memory management and CPU usage.<br>
+Compiled languages need a “build” step – they need to be manually compiled first. You need to “rebuild” the program every time you need to make a change. In our hummus example, the entire translation is written before it gets to you. If the original author decides that he wants to use a different kind of olive oil, the entire recipe would need to be translated again and resent to you.<br>
+
+[^3]: interpreted : Interpreters run through a program line by line and execute each command. Here, if the author decides he wants to use a different kind of olive oil, he could scratch the old one out and add the new one. Your translator friend can then convey that change to you as it happens.<br>
+Interpreted languages were once significantly slower than compiled languages. But, with the development of just-in-time compilation, that gap is shrinking.<br>
