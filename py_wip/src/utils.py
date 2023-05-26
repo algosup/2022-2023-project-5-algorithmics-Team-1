@@ -1,3 +1,4 @@
+import re
 from typing import Callable, Optional
 
 from src.analyzer import FormulaParser
@@ -48,12 +49,12 @@ def get_max_tank(tanks: list[Tank]) -> Tank:
     return max(tanks, key=lambda t: t.level)
 
 def get_largest_tank(tanks: list[Tank]) -> Tank:
-    """Returns the tank with the largest capacity of the tanks provided."""
-    return max(tanks, key=lambda t: t.max)
+    """Returns the tank with the largest capacity available of the tanks provided."""
+    return max(tanks, key=lambda t: t.max - t.level)
 
 def get_least_tank(tanks: list[Tank]) -> Tank:
-    """Returns the tank with the least capacity of the tanks provided."""
-    return min(tanks, key=lambda t: t.max)
+    """Returns the tank with the least capacity available of the tanks provided."""
+    return min(tanks, key=lambda t: t.max - t.level)
 
 def get_name_from_tanks(tanks: list[Tank]) -> str:
     """Returns the shortneid name of the tanks provided."""
@@ -83,6 +84,9 @@ def get_tanks_with_nodes(tanks: list[Tank]) -> list[Tank]:
 def get_empty_tanks(tanks: list[Tank]) -> list[Tank]:
     """Returns only a list of tanks that are empty."""
     return [tank for tank in tanks if tank.level == 0]
+
+def get_filled_tanks(tanks: list[Tank]) -> list[Tank]:
+    return [tank for tank in tanks if tank.level > 0 and tank.level < tank.max]
 
 def aggregate(tanks: list[Tank], parsed_formula: list[tuple[float, str]]) -> list[tuple[float, Tank]]:
     """Aggregates the parsed formula with the list of tanks provided.

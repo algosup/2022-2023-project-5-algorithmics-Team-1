@@ -200,26 +200,26 @@ class TestUtils(unittest.TestCase):
     def test_get_largest_tank(self):
         # Arrange
         tanks = [
-            Tank("t1", 100, level=100),
+            Tank("t1", 150, level=150),
             Tank("t2", 75, level=75),
-            Tank("t3", 25, level=25),
-            Tank("t4", 150, level=150),
+            Tank("t3", 25, level=12.5),
+            Tank("t4", 100, level=100),
         ]
 
         # Act
         largest_tank = get_largest_tank(tanks)
 
         # Assert
-        self.assertEqual(largest_tank, tanks[3])
+        self.assertEqual(largest_tank, tanks[2])
 
 
     def test_get_least_tank(self):
         # Arrange
         tanks = [
             Tank("t1", 10, level=10),
-            Tank("t2", 75, level=75),
-            Tank("t3", 25, level=25),
-            Tank("t4", 150, level=150),
+            Tank("t2", 75, level=0),
+            Tank("t3", 25, level=10),
+            Tank("t4", 150, level=145),
         ]
 
         # Act
@@ -228,6 +228,20 @@ class TestUtils(unittest.TestCase):
         # Assert
         self.assertEqual(least_tank, tanks[0])
 
+    def test_get_filled_tanks(self):
+        # Arrange
+        tanks = [
+            Tank("t1", 100, level=0),
+            Tank("t2", 75, level=75),
+            Tank("t3", 25, level=15),
+            Tank("t4", 150, level=100),
+        ]
+
+        # Act
+        filled_tanks = get_filled_tanks(tanks)
+
+        # Assert
+        self.assertEqual(filled_tanks, [tanks[2], tanks[3]])
 
 
 if __name__ == "__main__":
