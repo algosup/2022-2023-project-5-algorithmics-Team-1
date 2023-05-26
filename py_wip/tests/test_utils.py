@@ -3,7 +3,7 @@ import unittest
 from src.analyzer import FormulaParser
 from src.liquid import Liquid
 from src.tank import Tank
-from src.utils import _number_to_percentage, _percentage_to_number, check_tank_formula, theoretical_max , get_min_level, get_name_from_tanks, create_nodes, get_tanks_with_nodes, aggregate ,remove_useless_tanks
+from src.utils import *
 
 class TestUtils(unittest.TestCase):
 
@@ -30,7 +30,7 @@ class TestUtils(unittest.TestCase):
         total = 180
 
         # Act
-        percentage = _number_to_percentage(number, total)
+        percentage = n_to_p(number, total)
 
         # Assert
         self.assertEqual(percentage, 50)
@@ -41,12 +41,12 @@ class TestUtils(unittest.TestCase):
         total = 180
 
         # Act
-        number = _percentage_to_number(percentage, total)
+        number = p_to_n(percentage, total)
 
         # Assert
         self.assertEqual(number, 90)
 
-    def test_get_min_level(self):
+    def test_get_min_tank(self):
         # Arrange
         tanks = [
             Tank("t1", 100, level=100),
@@ -54,12 +54,13 @@ class TestUtils(unittest.TestCase):
             Tank("t3", 25, level=25),
             Tank("t4", 80, level=80),
         ]
-
+        
         # Act
-        minimum = get_min_level(tanks)
+        minimum = get_min_tank(tanks)
+        minimum_level = minimum.max
 
         # Assert
-        self.assertEqual(minimum, 25)
+        self.assertEqual(minimum_level, 25)
 
     def test_get_name_from_tanks(self):
         # Arrange
@@ -164,6 +165,70 @@ class TestUtils(unittest.TestCase):
 
         # Assert
         self.assertEqual(result, True)
+
+
+    def test_get_empty_tanks(self):
+        # Arrange
+        tanks = [
+            Tank("t1", 100, level=0),
+            Tank("t2", 75, level=75),
+            Tank("t3", 25, level=25),
+            Tank("t4", 80, level=0),
+        ]
+
+        # Act
+        empty_tanks = get_empty_tanks(tanks)
+
+        # Assert
+        self.assertEqual(empty_tanks, [tanks[0], tanks[3]])
+
+    def test_get_max_tank(self):
+        # Arrange
+        tanks = [
+            Tank("t1", 100, level=100),
+            Tank("t2", 75, level=75),
+            Tank("t3", 200, level=200),
+            Tank("t4", 80, level=80),
+        ]
+
+        # Act
+        max_tank = get_max_tank(tanks)
+
+        # Assert
+        self.assertEqual(max_tank, tanks[2])
+
+    def test_get_largest_tank(self):
+        # Arrange
+        tanks = [
+            Tank("t1", 100, level=100),
+            Tank("t2", 75, level=75),
+            Tank("t3", 25, level=25),
+            Tank("t4", 150, level=150),
+        ]
+
+        # Act
+        largest_tank = get_largest_tank(tanks)
+
+        # Assert
+        self.assertEqual(largest_tank, tanks[3])
+
+
+    def test_get_least_tank(self):
+        # Arrange
+        tanks = [
+            Tank("t1", 10, level=10),
+            Tank("t2", 75, level=75),
+            Tank("t3", 25, level=25),
+            Tank("t4", 150, level=150),
+        ]
+
+        # Act
+        least_tank = get_least_tank(tanks)
+
+        # Assert
+        self.assertEqual(least_tank, tanks[0])
+
+
 
 if __name__ == "__main__":
     unittest.main()
