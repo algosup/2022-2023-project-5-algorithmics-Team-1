@@ -39,9 +39,9 @@ Returns
     The converted percentage.
 """
 
-def get_min_level(tanks: list[Tank]) -> float:
-    """Returns the minimum level of the tanks provided."""
-    return min([t.level for t in tanks])
+def get_min_tank(tanks: list[Tank]) -> Tank:
+    """Returns the tank with the minimum level of the tanks provided."""
+    return min(tanks, key=lambda t: t.level)
 
 def get_name_from_tanks(tanks: list[Tank]) -> str:
     """Returns the shortneid name of the tanks provided."""
@@ -70,7 +70,7 @@ def get_tanks_with_nodes(tanks: list[Tank]) -> list[Tank]:
 
 def get_empty_tanks(tanks: list[Tank]) -> list[Tank]:
     """Returns only a list of tanks that are empty."""
-    return list(set(tanks) - set(get_tanks_with_nodes(tanks)))
+    return [tank for tank in tanks if tank.level == 0]
 
 def aggregate(tanks: list[Tank], parsed_formula: list[tuple[float, str]]) -> list[tuple[float, Tank]]:
     """Aggregates the parsed formula with the list of tanks provided.
