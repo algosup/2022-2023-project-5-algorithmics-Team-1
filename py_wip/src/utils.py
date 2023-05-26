@@ -68,6 +68,10 @@ def get_tanks_with_nodes(tanks: list[Tank]) -> list[Tank]:
     """Returns only a list of tanks that have nodes."""
     return [tank for tank in tanks if len(tank.nodes) > 0]
 
+def get_empty_tanks(tanks: list[Tank]) -> list[Tank]:
+    """Returns only a list of tanks that are empty."""
+    return list(set(tanks) - set(get_tanks_with_nodes(tanks)))
+
 def aggregate(tanks: list[Tank], parsed_formula: list[tuple[float, str]]) -> list[tuple[float, Tank]]:
     """Aggregates the parsed formula with the list of tanks provided.
 
