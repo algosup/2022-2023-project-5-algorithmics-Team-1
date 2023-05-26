@@ -43,6 +43,10 @@ def get_min_tank(tanks: list[Tank]) -> Tank:
     """Returns the tank with the minimum level of the tanks provided."""
     return min(tanks, key=lambda t: t.level)
 
+def get_max_tank(tanks: list[Tank]) -> Tank:
+    """Returns the tank with the maximum level of the tanks provided."""
+    return max(tanks, key=lambda t: t.level)
+
 def get_name_from_tanks(tanks: list[Tank]) -> str:
     """Returns the shortneid name of the tanks provided."""
     return ",".join([t.name[1:] for t in tanks])
