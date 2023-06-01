@@ -1,7 +1,4 @@
 class Liquid():
-    name: str
-    level: float
-
     def __init__(self, name: str, level: float) -> None:
         self.name = name
         self.level = level

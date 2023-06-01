@@ -1,7 +1,7 @@
-import re
+import random
+
 from typing import Callable, Optional
 
-from src.analyzer import FormulaParser
 from src.tank import Tank
 
 def _percentage_to_number(perc: float, total: float) -> float:
@@ -88,6 +88,10 @@ def get_empty_tanks(tanks: list[Tank]) -> list[Tank]:
 def get_filled_tanks(tanks: list[Tank]) -> list[Tank]:
     return [tank for tank in tanks if tank.level > 0 and tank.level < tank.max]
 
+def get_tanks_in_formula(tanks: list[Tank], parsed_formula: list[tuple[float, str]]) -> list[Tank]:
+    """Returns only a list of tanks that are in the parsed formula."""
+    return [tank for tank in tanks if tank.name in [name for _, name in parsed_formula]]
+
 def aggregate(tanks: list[Tank], parsed_formula: list[tuple[float, str]]) -> list[tuple[float, Tank]]:
     """Aggregates the parsed formula with the list of tanks provided.
 
@@ -158,3 +162,28 @@ def check_tank_formula(tank: Tank, parsed_formula: list[tuple[float, str]], epsi
             return False
 
     return True
+
+def generate_percentages(num_percentages: int) -> list[float]:
+    percentages = []
+    remaining_percentage = 100
+
+    for _ in range(num_percentages - 1):
+        if remaining_percentage <= 0.01:
+            break
+        percentage = random.uniform(0.01, remaining_percentage)
+        percentage = round(percentage, 4)
+        percentages.append(percentage)
+        remaining_percentage -= percentage
+
+    # Calculate the last percentage to ensure the sum is 100%
+    percentages.append(round(remaining_percentage, 2))
+
+    # Adjust the sum of percentages to ensure it is exactly 100
+    diff = 100 - sum(percentages)
+    if diff != 0:
+        if percentages[-1] + diff > 0:
+            percentages[-1] += diff
+        else:
+            percentages[-1] = 0
+
+    return percentages

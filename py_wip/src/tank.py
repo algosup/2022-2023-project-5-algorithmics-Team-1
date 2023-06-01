@@ -1,5 +1,7 @@
 from src.liquid import Liquid
 
+EPSILON = 0.000000001
+
 class Tank():
     """Represents a tank.
 
@@ -49,7 +51,10 @@ class Tank():
         if level < 0:
             raise ValueError(f"Cannot move negative amount of liquid {level}.")
         if (target.max - target.level) < level:
-            raise ValueError(f"Not enough space available in tank {target} < {level}.")
+            if abs(target.max - target.level - level) < EPSILON:
+                level = target.max - target.level
+            else:
+                raise ValueError(f"Not enough space available in tank {target} < {level}.")
 
         if self.level < level:
             raise ValueError(f"Not enough liquid available in tank {self} < {level}.")
@@ -69,7 +74,10 @@ class Tank():
             return
 
         if self.level * perc > target.max - target.level :
-            raise ValueError(f"Not enough space available in tank {target} < {perc*100}% of {self}.")
+            if abs(target.max - (self.level * perc)) < EPSILON:
+                perc = target.max - self.level / target.max
+            else:
+                raise ValueError(f"Not enough space available in tank {target} < {perc*100}%  of {self}.")
 
         if self.level < self.level * perc:
             raise ValueError(f"Not enough liquid available in tank {self} < {perc*100}% of {target}.")
