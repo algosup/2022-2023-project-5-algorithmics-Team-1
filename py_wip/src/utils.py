@@ -182,7 +182,6 @@ def generate_percentages(num_percentages: int) -> list[Dec]:
     # Adjust the sum of percentages to ensure it is exactly 100
     diff = 100 - sum(percentages)
     if diff != 0:
-        print("call")
         if percentages[-1] + diff > 0:
             percentages[-1] += diff
         else:
