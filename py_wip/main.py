@@ -4,27 +4,26 @@ import sys
 from pprint import pprint
 
 from src.analyzer import FormulaParser
-from src.liquid import Liquid
 from src.tank import Tank
 from src.utils import check_tank_formula, create_nodes, generate_percentages, get_empty_tanks, get_filled_tanks, get_largest_tank, get_perc_from_name, get_tanks_with_nodes, remove_useless_tanks, theoretical_max, p_to_n
 
 sys.setrecursionlimit(100_000)
 
 if __name__ == "__main__":
-    for i in range(1, 100):
-        random.seed(i)
+    for k in range(1, 101):
+        random.seed(k)
         N_TANKS = random.randint(10, 400)
 
         MINL_TANK = random.randint(10, 300)
         MAXL_TANK = random.randint(MINL_TANK, 300)
 
-        WASTE_TANK = Tank("waste", 100_000_000, level=0)
+        WASTE_TANK = Tank("waste", 100_000_000, flevel=0)
 
         # Create tanks
         tanks: list[Tank] = []
         for i in range(1, N_TANKS+1):
             ml = random.randint(MINL_TANK, MAXL_TANK)
-            tanks.append(Tank("t"+str(i), ml, level=0 if random.choice([0, 1]) == 0 else ml)) # 0 or | FULL
+            tanks.append(Tank("t"+str(i), ml, flevel=0 if random.choice([0, 1]) == 0 else ml)) # 0 or | FULL
             #tanks.append(Tank("t"+str(i), ml, level=random.randint(0, ml))) # 0 to -> FULL 
 
         sorted_tanks = [tank for tank in tanks if tank.level != 0]
@@ -41,6 +40,8 @@ if __name__ == "__main__":
                     break
 
         PARSED_FORMULA = FormulaParser(FORMULA[:-1]).parse()
+        
+        print(f"TEST {k}")
 
         # Get theoretical max based on formula
         max_blend = theoretical_max(tanks, PARSED_FORMULA)

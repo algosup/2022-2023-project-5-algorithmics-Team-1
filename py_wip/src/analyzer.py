@@ -1,3 +1,4 @@
+from decimal import Decimal as Dec
 from typing import Any
 
 class DefaultParser():
@@ -16,27 +17,27 @@ class DefaultParser():
 
 class FormulaParser(DefaultParser):
 
-    def parse(self) -> list[tuple[float, str]]:
-        output: list[tuple[float, str]] = []
+    def parse(self) -> list[tuple[Dec, str]]:
+        output: list[tuple[Dec, str]] = []
         check_sum = 0
         addends = self.formula.split('+')
         for addend in addends:
             percentage, tank_name = addend.split('%')
-            output.append((float(percentage), tank_name))
-            check_sum += float(percentage)
+            output.append((Dec(round(float(percentage), 4)), tank_name))
+            check_sum += Dec(percentage)
 
-        if check_sum != 100.0:
+        if round(check_sum) != Dec(100):
             raise ValueError(f"Sum of percentages is not 100%: {check_sum}%")
 
         return output
 
 class ListParser(DefaultParser):
 
-    def parse(self) -> list[tuple[float, float, str]]:
+    def parse(self) -> list[tuple[Dec, Dec, str]]:
         output = []
         addends = self.formula.split('+')
         for addend in addends:
             capacity, tank_name = addend.split(',')
             currentliq, maxcap = capacity.split('/')
-            output.append((float(currentliq), float(maxcap), tank_name))
+            output.append((Dec(currentliq), Dec(maxcap), tank_name))
         return output

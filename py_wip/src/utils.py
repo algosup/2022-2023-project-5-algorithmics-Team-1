@@ -1,5 +1,6 @@
 import random
 
+from decimal import Decimal as Dec
 from typing import Callable, Optional
 
 from src.tank import Tank
@@ -88,23 +89,23 @@ def get_empty_tanks(tanks: list[Tank]) -> list[Tank]:
 def get_filled_tanks(tanks: list[Tank]) -> list[Tank]:
     return [tank for tank in tanks if tank.level > 0 and tank.level < tank.max]
 
-def get_tanks_in_formula(tanks: list[Tank], parsed_formula: list[tuple[float, str]]) -> list[Tank]:
+def get_tanks_in_formula(tanks: list[Tank], parsed_formula: list[tuple[Dec, str]]) -> list[Tank]:
     """Returns only a list of tanks that are in the parsed formula."""
     return [tank for tank in tanks if tank.name in [name for _, name in parsed_formula]]
 
-def aggregate(tanks: list[Tank], parsed_formula: list[tuple[float, str]]) -> list[tuple[float, Tank]]:
+def aggregate(tanks: list[Tank], parsed_formula: list[tuple[Dec, str]]) -> list[tuple[Dec, Tank]]:
     """Aggregates the parsed formula with the list of tanks provided.
 
     Parameters
     -------------
     tanks: `list[Tank]`
         The list of tanks to use.
-    parsed_formula: `list[tuple[float, str]]`
+    parsed_formula: `list[tuple[Dec, str]]`
         The formula already parsed, ready to use.
 
     Returns
     ----------
-    `list[tuple[float, Tank]]`
+    `list[tuple[Dec, Tank]]`
         The aggregated list.
     """
     return [
@@ -115,7 +116,7 @@ def aggregate(tanks: list[Tank], parsed_formula: list[tuple[float, str]]) -> lis
         for perc, tank_name in parsed_formula
     ]
 
-def theoretical_max(tanks: list[Tank], parsed_formula: list[tuple[float, str]]) -> float:
+def theoretical_max(tanks: list[Tank], parsed_formula: list[tuple[Dec, str]]) -> Dec:
     """Calculates the maximum theoretical quantity based on the formula and the list of tanks provided.
 
     Parameters
@@ -127,25 +128,25 @@ def theoretical_max(tanks: list[Tank], parsed_formula: list[tuple[float, str]]) 
 
     Returns
     -----------
-    `float`
+    `Decimal`
         The maximum theoretical quantity.
     """
     zip_tanks = aggregate(tanks, parsed_formula)
 
     return min([tank.level / (perc / 100) for perc, tank in zip_tanks])
 
-def remove_useless_tanks(tanks: list[Tank], parsed_formula: list[tuple[float, str]]) -> None:
+def remove_useless_tanks(tanks: list[Tank], parsed_formula: list[tuple[Dec, str]]) -> None:
     """Removes the tanks that are useless, i.e. the ones that are filled and not in the formula."""
     names = [name for _, name in parsed_formula]
     for tank in tanks.copy():
         if tank.level != 0 and not (tank.name in names):
             tanks.remove(tank)
 
-def get_perc_from_name(name: str, parsed_formula: list[tuple[float, str]]) -> float:
+def get_perc_from_name(name: str, parsed_formula: list[tuple[Dec, str]]) -> Dec:
     """Returns the percentage of the tank in the formula."""
-    return [perc for perc, fname in parsed_formula if fname == name][0]
+    return Dec([perc for perc, fname in parsed_formula if fname == name][0])
 
-def check_tank_formula(tank: Tank, parsed_formula: list[tuple[float, str]], epsilon: float = 0.1) -> Optional[bool]:
+def check_tank_formula(tank: Tank, parsed_formula: list[tuple[Dec, str]], epsilon: Dec = Dec(0.1)) -> Optional[bool]:
     """Checks if each liquids in the tank are in the formula and if their percentage are correct."""
     if not tank.liquids:
         return None
@@ -163,27 +164,29 @@ def check_tank_formula(tank: Tank, parsed_formula: list[tuple[float, str]], epsi
 
     return True
 
-def generate_percentages(num_percentages: int) -> list[float]:
+def generate_percentages(num_percentages: int) -> list[Dec]:
     percentages = []
     remaining_percentage = 100
 
     for _ in range(num_percentages - 1):
-        if remaining_percentage <= 0.01:
+        if remaining_percentage <= 0.1:
             break
-        percentage = random.uniform(0.01, remaining_percentage)
+        percentage = random.uniform(0.1, remaining_percentage)
         percentage = round(percentage, 4)
-        percentages.append(percentage)
+        percentages.append(Dec(percentage))
         remaining_percentage -= percentage
 
     # Calculate the last percentage to ensure the sum is 100%
-    percentages.append(round(remaining_percentage, 2))
+    percentages.append(Dec(remaining_percentage))
 
     # Adjust the sum of percentages to ensure it is exactly 100
     diff = 100 - sum(percentages)
     if diff != 0:
+        print("call")
         if percentages[-1] + diff > 0:
             percentages[-1] += diff
         else:
-            percentages[-1] = 0
+            percentages[-2] = percentages[-2]/2
+            percentages[-1] = percentages[-2]/2
 
     return percentages
