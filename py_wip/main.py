@@ -26,6 +26,9 @@ if __name__ == "__main__":
             #tanks.append(Tank("t"+str(i), ml, flevel=random.randint(0, ml))) # 0 to -> FULL 
 
         sorted_tanks = [tank for tank in tanks if tank.level != 0]
+        if len(sorted_tanks) < 2:
+            print("IMPOSSIBLE")
+            continue
         F_TANKS = random.randint(2, len(sorted_tanks))
         FORMULA = ""
         taken_tanks = []
@@ -49,7 +52,7 @@ if __name__ == "__main__":
         remove_useless_tanks(tanks, PARSED_FORMULA)
 
         create_nodes(tanks)
-        
+
         def next_process(empty_tanks: list[Tank], largest_tank: Tank):
             new_empty = empty_tanks
             new_empty.remove(largest_tank)
@@ -87,7 +90,7 @@ if __name__ == "__main__":
                     return
                 next_process(empty_tanks, largest_tank)
 
-        if max_blend > min(tanks, key=lambda tank: tank.max).max:
+        if max_blend > min(tanks, key=lambda tank: tank.max).max and get_empty_tanks(tanks):
             process(get_empty_tanks(tanks))
         else:
             print("IMPOSSIBLE")
