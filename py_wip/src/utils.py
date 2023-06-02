@@ -176,16 +176,9 @@ def generate_percentages(num_percentages: int) -> list[Dec]:
         percentages.append(Dec(percentage))
         remaining_percentage -= percentage
 
-    # Calculate the last percentage to ensure the sum is 100%
     percentages.append(Dec(remaining_percentage))
 
-    # Adjust the sum of percentages to ensure it is exactly 100
-    diff = 100 - sum(percentages)
-    if diff != 0:
-        if percentages[-1] + diff > 0:
-            percentages[-1] += diff
-        else:
-            percentages[-2] = percentages[-2]/2
-            percentages[-1] = percentages[-2]/2
+    if min(percentages) < 0.01:
+        return generate_percentages(num_percentages)
 
     return percentages
