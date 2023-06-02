@@ -10,10 +10,10 @@ class TestUtils(unittest.TestCase):
     def test_theorical_max(self):
         # Arrange
         tanks = [
-            Tank("t1", 100, level=100),
-            Tank("t2", 75, level=75),
-            Tank("t3", 25, level=25),
-            Tank("t4", 80, level=80),
+            Tank("t1", 100, flevel=100),
+            Tank("t2", 75, flevel=75),
+            Tank("t3", 25, flevel=25),
+            Tank("t4", 80, flevel=80),
         ]
         formula = "25%t1+50%t2+12.5%t3+12.5%t4"
         parsed_formula = FormulaParser(formula).parse()
@@ -49,26 +49,26 @@ class TestUtils(unittest.TestCase):
     def test_get_min_tank(self):
         # Arrange
         tanks = [
-            Tank("t1", 100, level=100),
-            Tank("t2", 75, level=75),
-            Tank("t3", 25, level=25),
-            Tank("t4", 80, level=80),
+            Tank("t1", 100, flevel=100),
+            Tank("t2", 75, flevel=75),
+            Tank("t3", 25, flevel=25),
+            Tank("t4", 80, flevel=80),
         ]
         
         # Act
         minimum = get_min_tank(tanks)
-        minimum_level = minimum.max
+        minimum_flevel = minimum.max
 
         # Assert
-        self.assertEqual(minimum_level, 25)
+        self.assertEqual(minimum_flevel, 25)
 
     def test_get_name_from_tanks(self):
         # Arrange
         tanks = [
-            Tank("t1", 100, level=100),
-            Tank("t2", 75, level=75),
-            Tank("t3", 25, level=25),
-            Tank("t4", 80, level=80),
+            Tank("t1", 100, flevel=100),
+            Tank("t2", 75, flevel=75),
+            Tank("t3", 25, flevel=25),
+            Tank("t4", 80, flevel=80),
         ]
 
         # Act
@@ -80,10 +80,10 @@ class TestUtils(unittest.TestCase):
     def test_create_nodes(self):
         # Arrange
         tanks = [
-            Tank("t1", 100, level=0),
-            Tank("t2", 75, level=75),
-            Tank("t3", 25, level=25),
-            Tank("t4", 80, level=0),
+            Tank("t1", 100, flevel=0),
+            Tank("t2", 75, flevel=75),
+            Tank("t3", 25, flevel=25),
+            Tank("t4", 80, flevel=0),
         ]
 
         # Act
@@ -98,10 +98,10 @@ class TestUtils(unittest.TestCase):
     def test_get_tanks_with_nodes(self):
         # Arrange
         tanks = [
-            Tank("t1", 100, level=0),
-            Tank("t2", 75, level=75),
-            Tank("t3", 25, level=25),
-            Tank("t4", 80, level=0),
+            Tank("t1", 100, flevel=0),
+            Tank("t2", 75, flevel=75),
+            Tank("t3", 25, flevel=25),
+            Tank("t4", 80, flevel=0),
         ]
 
         # Act
@@ -114,10 +114,10 @@ class TestUtils(unittest.TestCase):
     def test_aggregate(self):
         # Arrange
         tanks = [
-            Tank("t1", 100, level=0),
-            Tank("t2", 75, level=75),
-            Tank("t3", 25, level=25),
-            Tank("t4", 80, level=0),
+            Tank("t1", 100, flevel=0),
+            Tank("t2", 75, flevel=75),
+            Tank("t3", 25, flevel=25),
+            Tank("t4", 80, flevel=0),
         ]
         formula = [(0.25,"t1"),(0.5,"t2"),(0.25,"t3")]
         # Act
@@ -129,14 +129,14 @@ class TestUtils(unittest.TestCase):
     def test_remove_useless_tanks(self):
         # Arrange
         tanks = [
-            Tank("t1", 100, level=100),
-            Tank("t2", 75, level=75),
-            Tank("t3", 25, level=25),
-            Tank("t4", 80, level=0),
-            Tank("t5", 150, level=0),
-            Tank("t6", 95, level=95),
-            Tank("t7", 35, level=0),
-            Tank("t8", 180, level=180),
+            Tank("t1", 100, flevel=100),
+            Tank("t2", 75, flevel=75),
+            Tank("t3", 25, flevel=25),
+            Tank("t4", 80, flevel=0),
+            Tank("t5", 150, flevel=0),
+            Tank("t6", 95, flevel=95),
+            Tank("t7", 35, flevel=0),
+            Tank("t8", 180, flevel=180),
         ]
         formula = "25%t1+50%t2+25%t3"
         parsed_formula = FormulaParser(formula).parse()
@@ -170,10 +170,10 @@ class TestUtils(unittest.TestCase):
     def test_get_empty_tanks(self):
         # Arrange
         tanks = [
-            Tank("t1", 100, level=0),
-            Tank("t2", 75, level=75),
-            Tank("t3", 25, level=25),
-            Tank("t4", 80, level=0),
+            Tank("t1", 100, flevel=0),
+            Tank("t2", 75, flevel=75),
+            Tank("t3", 25, flevel=25),
+            Tank("t4", 80, flevel=0),
         ]
 
         # Act
@@ -185,10 +185,10 @@ class TestUtils(unittest.TestCase):
     def test_get_max_tank(self):
         # Arrange
         tanks = [
-            Tank("t1", 100, level=100),
-            Tank("t2", 75, level=75),
-            Tank("t3", 200, level=200),
-            Tank("t4", 80, level=80),
+            Tank("t1", 100, flevel=100),
+            Tank("t2", 75, flevel=75),
+            Tank("t3", 200, flevel=200),
+            Tank("t4", 80, flevel=80),
         ]
 
         # Act
@@ -200,10 +200,10 @@ class TestUtils(unittest.TestCase):
     def test_get_largest_tank(self):
         # Arrange
         tanks = [
-            Tank("t1", 150, level=150),
-            Tank("t2", 75, level=75),
-            Tank("t3", 25, level=12.5),
-            Tank("t4", 100, level=100),
+            Tank("t1", 150, flevel=150),
+            Tank("t2", 75, flevel=75),
+            Tank("t3", 25, flevel=12.5),
+            Tank("t4", 100, flevel=100),
         ]
 
         # Act
@@ -216,10 +216,10 @@ class TestUtils(unittest.TestCase):
     def test_get_least_tank(self):
         # Arrange
         tanks = [
-            Tank("t1", 10, level=10),
-            Tank("t2", 75, level=0),
-            Tank("t3", 25, level=10),
-            Tank("t4", 150, level=145),
+            Tank("t1", 10, flevel=10),
+            Tank("t2", 75, flevel=0),
+            Tank("t3", 25, flevel=10),
+            Tank("t4", 150, flevel=145),
         ]
 
         # Act
@@ -231,10 +231,10 @@ class TestUtils(unittest.TestCase):
     def test_get_filled_tanks(self):
         # Arrange
         tanks = [
-            Tank("t1", 100, level=0),
-            Tank("t2", 75, level=75),
-            Tank("t3", 25, level=15),
-            Tank("t4", 150, level=100),
+            Tank("t1", 100, flevel=0),
+            Tank("t2", 75, flevel=75),
+            Tank("t3", 25, flevel=15),
+            Tank("t4", 150, flevel=100),
         ]
 
         # Act

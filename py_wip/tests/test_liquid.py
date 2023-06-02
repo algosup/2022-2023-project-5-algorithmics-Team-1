@@ -1,4 +1,5 @@
 import unittest
+from decimal import Decimal as Dec
 
 from src.liquid import Liquid
 
@@ -21,8 +22,8 @@ class TestLiquid(unittest.TestCase):
         self.assertEqual(l1.level, l1_startlevel / 2)
         self.assertEqual(remaining1.level, l1_startlevel / 2)
 
-        self.assertAlmostEqual(l2.level, l2_startlevel * 0.7, delta=EPSILON)
-        self.assertAlmostEqual(remaining2.level, l2_startlevel * 0.3, delta=EPSILON)
+        self.assertAlmostEqual(l2.level, Dec(l2_startlevel * 0.7), delta=EPSILON)
+        self.assertAlmostEqual(remaining2.level, Dec(l2_startlevel * 0.3), delta=EPSILON)
 
     def test_truediv_simple(self):
         # Arrange
