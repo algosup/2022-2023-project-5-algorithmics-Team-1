@@ -74,6 +74,16 @@ The formula was given by the Cellar master[^1].
 
 #### value in functions 
 
+|  Where | Class  | value | for ? | type |
+|:---:|:---:|:---:|:---:|:---:|
+|Tank.py| Tank : | name | name of the tank.| (str) |
+|     |     | max | Level max of the tank.| (float) |
+|     |     | nodes | The nodes of the tank. | (List) |
+|     |     | liquids | The liquids in the tank.| (float) |
+|     | Liquid :| name | name of where are the liquid (the tank name).| (str) |
+|     |     | level |  Level of Liquids on the tank. | (float/ decimal) |
+|     | Analyzer : | formula | formula give by the Cellar master |
+
 
 ### 2_4.Cost estimation
 
