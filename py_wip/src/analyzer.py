@@ -2,8 +2,7 @@ from decimal import Decimal as Dec
 from typing import Any
 
 class DefaultParser():
-    formula: str
-    def __init__(self, formula) -> None:
+    def __init__(self, formula: str) -> None:
         self.formula = formula
 
     def parse(self) -> Any:

@@ -96,10 +96,32 @@ if __name__ == "__main__":
             print("IMPOSSIBLE")
             continue
 
+        success_tanks = [tank for tank in tanks if check_tank_formula(tank, PARSED_FORMULA)]
+        empt_tanks = get_empty_tanks(tanks)
+        waste_tanks = set(tanks) - set(success_tanks) - set(empt_tanks)
+
+        def optimize_wasted(empty_tanks: list[Tank], wasted_tanks: list[Tank]):
+            if len(empty_tanks) == 0 or len(wasted_tanks) == 0:
+                return
+            largest_empty = get_largest_tank(empty_tanks)
+            max_waste = max(wasted_tanks, key=lambda tank: tank.level)
+            if largest_empty.max < max_waste.level:
+                max_waste.move_unit_to(largest_empty, largest_empty.max)
+                print(f"{max_waste.name} {round(largest_empty.max, 4)}L -> {largest_empty.name}")
+                wasted_tanks.remove(max_waste)
+                empty_tanks.remove(largest_empty)
+                optimize_wasted(empty_tanks, wasted_tanks)
+            else:
+                empty_tanks.remove(largest_empty)
+                optimize_wasted(empty_tanks, wasted_tanks)
+
+        print("OPTIMIZING WASTED TANKS")
+        optimize_wasted(empt_tanks, waste_tanks)
+
         current_success = sum([tank.level for tank in tanks if check_tank_formula(tank, PARSED_FORMULA)])
         current_wasted = WASTE_TANK.level + sum([tank.level for tank in tanks if tank.level != 0 and tank.level != tank.max])
         stats.append((current_success, current_wasted, initial_max))
-        
+
         print("WASTED:", current_wasted)  
         print("SUCCESS:", current_success, "/", initial_max, "(init theoretical max)", "\n")
 
