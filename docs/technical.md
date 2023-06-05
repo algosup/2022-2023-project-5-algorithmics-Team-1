@@ -12,6 +12,7 @@
       - [The Complexity](#the-complexity)
       - [The language choose](#the-language-choose)
     - [2\_3.Development : How is it work ?](#2_3development--how-is-it-work-)
+      - [value in functions](#value-in-functions)
     - [2\_4.Cost estimation](#2_4cost-estimation)
   - [3.Risks](#3risks)
     - [3\_1.Accessibility](#3_1accessibility)
@@ -70,6 +71,9 @@ The values to be avoided absolutely for the efficiency of the program, are O(nlo
 <img src="/docs/technical1.png">
 <!--à continuer -->
 The formula was given by the Cellar master[^1].
+
+#### value in functions 
+
 
 ### 2_4.Cost estimation
 
