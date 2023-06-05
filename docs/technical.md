@@ -79,7 +79,7 @@ The values to be avoided absolutely for the efficiency of the program, are O(nlo
 #### Value in functions 
 
 | Where and Class | value | for ? | type |
-|:---:|:---:|:---:|:---:|:---:|
+|:---:|:---:|:---:|:---:|
 | tank.py in Tank : | name | name of the tank.| (str) |
 |     | max | Level max of the tank.| (float) |
 |     | nodes | The nodes of the tank. | (List) |
