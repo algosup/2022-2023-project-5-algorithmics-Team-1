@@ -2,9 +2,9 @@ import random
 
 from src.analyzer import FormulaParser
 from src.tank import Tank
-from src.utils import check_tank_formula, create_nodes, generate_percentages, get_empty_tanks, get_filled_tanks, get_largest_tank, get_perc_from_name, get_tanks_with_nodes, remove_useless_tanks, theoretical_max
+from src.utils import check_tank_formula, generate_percentages, get_empty_tanks, get_filled_tanks, get_largest_tank, get_perc_from_name, get_tanks_in_formula, remove_useless_tanks, theoretical_max
 
-N_TESTS = 9000
+N_TESTS = 10_000
 N_START = 1
 
 if __name__ == "__main__":
@@ -51,8 +51,6 @@ if __name__ == "__main__":
 
         remove_useless_tanks(tanks, PARSED_FORMULA)
 
-        create_nodes(tanks)
-
         def next_process(empty_tanks: list[Tank], largest_tank: Tank):
             new_empty = empty_tanks
             new_empty.remove(largest_tank)
@@ -65,7 +63,7 @@ if __name__ == "__main__":
             largest_tank = get_largest_tank(empty_tanks)
             if largest_tank.max <= max_blend:
                 if largest_tank.level == 0:
-                    for tank in get_tanks_with_nodes(tanks):
+                    for tank in get_tanks_in_formula(tanks, PARSED_FORMULA):
                         units = get_perc_from_name(tank.name, PARSED_FORMULA) / 100 * largest_tank.max
                         tank.move_unit_to(largest_tank, units)
                         print(f"{tank.name} {round(units, 4)}L -> {largest_tank.name}")
@@ -74,7 +72,7 @@ if __name__ == "__main__":
 
                     next_process(empty_tanks, largest_tank)
                 else:
-                    for tank in get_tanks_with_nodes(tanks): # get largest tank <= max_blend
+                    for tank in get_tanks_in_formula(tanks, PARSED_FORMULA): # get largest tank <= max_blend
                         if tank == largest_tank:
                             units_to_keep = get_perc_from_name(tank.name, PARSED_FORMULA) / 100 * tank.max
                             tank.move_unit_to(WASTE_TANK, tank.level - units_to_keep)
