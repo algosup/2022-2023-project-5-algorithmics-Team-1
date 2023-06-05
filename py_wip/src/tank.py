@@ -3,7 +3,7 @@ from typing import Union
 
 from src.liquid import Liquid
 
-EPSILON = 0.0000000001
+EPSILON = Dec(0.0000000001)
 
 class Tank():
     """Represents a tank.
@@ -18,8 +18,6 @@ class Tank():
         The maximum level of the tank.
     name: `str`
         The name of the tank.
-    nodes: List[:class:`Tank`]
-        The nodes of the tank.
     """
 
     def __init__(self, name: str, fmax: float, flevel: float) -> None:
@@ -30,7 +28,6 @@ class Tank():
 
         self.name = name
         self.max = max
-        self.nodes = []
         self.liquids = [Liquid(name, level)] if level else []
 
     @property
@@ -63,7 +60,10 @@ class Tank():
                 raise ValueError(f"Not enough space available in tank {target} < {level}.")
 
         if self.level < level:
-            raise ValueError(f"Not enough liquid available in tank {self} < {level}.")
+            if abs(self.level - level) < EPSILON:
+                level = self.level
+            else:
+                raise ValueError(f"Not enough liquid available in tank {self} < {level}.")
         self.move_perclevel_to(target, level / self.level)
 
     def move_perclevel_to(self, target: "Tank", fperc: Union[float, Dec]) -> None:
@@ -87,7 +87,7 @@ class Tank():
             else:
                 raise ValueError(f"Not enough space available in tank {target} < {perc*100}% ({self.level * perc}) of {self}.")
 
-        if self.level < self.level * perc:
+        if abs(self.level - self.level * perc) < EPSILON:
             raise ValueError(f"Not enough liquid available in tank {self} < {perc*100}% of {target}.")
 
         for liquid in self.liquids:

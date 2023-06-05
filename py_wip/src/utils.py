@@ -61,27 +61,6 @@ def get_name_from_tanks(tanks: list[Tank]) -> str:
     """Returns the shortneid name of the tanks provided."""
     return ",".join([t.name[1:] for t in tanks])
 
-def create_nodes(tanks: list[Tank]) -> None:
-    """Creates the nodes for each tank based on the other tanks."""
-    for tank in tanks:
-        tank.nodes = [
-            other
-            for other in tanks
-            if tank != other
-            and tank.level > 0
-            and other.max - other.level >= tank.level
-            and other not in tank.nodes
-        ]
-
-def print_tanks_nodes(tanks: list[Tank]) -> None:
-    """A debug method that prints each tanks with their shortnied nodes name."""
-    for tank in tanks:
-        print(f"{tank} -> {get_name_from_tanks(tank.nodes)}")
-
-def get_tanks_with_nodes(tanks: list[Tank]) -> list[Tank]:
-    """Returns only a list of tanks that have nodes."""
-    return [tank for tank in tanks if len(tank.nodes) > 0]
-
 def get_empty_tanks(tanks: list[Tank]) -> list[Tank]:
     """Returns only a list of tanks that are empty."""
     return [tank for tank in tanks if tank.level == 0]

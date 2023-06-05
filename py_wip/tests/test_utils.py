@@ -77,40 +77,6 @@ class TestUtils(unittest.TestCase):
         # Assert
         self.assertEqual(name, "1,2,3,4")
 
-    def test_create_nodes(self):
-        # Arrange
-        tanks = [
-            Tank("t1", 100, flevel=0),
-            Tank("t2", 75, flevel=75),
-            Tank("t3", 25, flevel=25),
-            Tank("t4", 80, flevel=0),
-        ]
-
-        # Act
-        create_nodes(tanks)
-
-        # Assert
-        self.assertEqual(tanks[0].nodes, [])
-        self.assertEqual(tanks[1].nodes, [tanks[0], tanks[3]])
-        self.assertEqual(tanks[2].nodes, [tanks[0], tanks[3]])
-        self.assertEqual(tanks[3].nodes, [])
-    
-    def test_get_tanks_with_nodes(self):
-        # Arrange
-        tanks = [
-            Tank("t1", 100, flevel=0),
-            Tank("t2", 75, flevel=75),
-            Tank("t3", 25, flevel=25),
-            Tank("t4", 80, flevel=0),
-        ]
-
-        # Act
-        create_nodes(tanks)
-        list = get_tanks_with_nodes(tanks)
-
-        # Assert
-        self.assertEqual(list, [tanks[1], tanks[2]])
-
     def test_aggregate(self):
         # Arrange
         tanks = [
