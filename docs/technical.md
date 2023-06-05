@@ -40,7 +40,7 @@ And to implement a program that blends several wines to achieve a blend as close
 
 ### 2_2.Technical constraints
 #### The tanks
- The tanks cannot be half full. They must be either empty or completely full. This constraint must be taken into account with great importance, as oxidation of the wine must be avoided.
+The tanks cannot be half full. They must be either empty or completely full. This constraint must be taken into account with great importance, as oxidation of the wine must be avoided.
 <br>
 
 #### The Complexity
