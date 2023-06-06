@@ -1,8 +1,8 @@
 import random
 
-from src.analyzer import FormulaParser
 from src.tank import Tank
-from src.utils import check_tank_formula, generate_percentages, get_empty_tanks, get_filled_tanks, get_largest_tank, get_perc_from_name, get_tanks_in_formula, remove_useless_tanks, theoretical_max
+from src.utils import check_tank_formula, generate_percentages, get_empty_tanks
+from src.solver import Solver
 
 N_TESTS = 15_000
 N_START = 1
@@ -16,7 +16,6 @@ if __name__ == "__main__":
         N_TANKS = random.randint(10, 400)
         MINL_TANK = random.randint(10, 300)
         MAXL_TANK = random.randint(MINL_TANK, 300)
-        WASTE_TANK = Tank("waste", 100_000_000, flevel=0)
 
         tanks: list[Tank] = []
         for i in range(1, N_TANKS+1):
@@ -38,79 +37,25 @@ if __name__ == "__main__":
                     FORMULA += str(perc) + "%"+selected.name+"+"
                     break
 
-        PARSED_FORMULA = FormulaParser(FORMULA[:-1]).parse()
+        solver = Solver(tanks, FORMULA[:-1])
 
-        max_blend = theoretical_max(tanks, PARSED_FORMULA)
-        initial_max = max_blend
-        steps = []
-
-        remove_useless_tanks(tanks, PARSED_FORMULA)
-
-        def next_process(empty_tanks: list[Tank], largest_tank: Tank):
-            new_empty = empty_tanks
-            new_empty.remove(largest_tank)
-            if not new_empty:
-                new_empty = get_filled_tanks(tanks)
-            process(new_empty)
-
-        def process(empty_tanks: list[Tank]):
-            global max_blend
-            largest_tank = get_largest_tank(empty_tanks)
-            if largest_tank.max <= max_blend:
-                if largest_tank.level == 0:
-                    for tank in get_tanks_in_formula(tanks, PARSED_FORMULA):
-                        units = get_perc_from_name(tank.name, PARSED_FORMULA) / 100 * largest_tank.max
-                        tank.move_unit_to(largest_tank, units)
-                        steps.append((tank.name, round(units, 4), largest_tank.name))
-                    max_blend -= largest_tank.max
-                    next_process(empty_tanks, largest_tank)
-                else:
-                    for tank in get_tanks_in_formula(tanks, PARSED_FORMULA): # get largest tank <= max_blend
-                        if tank == largest_tank:
-                            units_to_keep = get_perc_from_name(tank.name, PARSED_FORMULA) / 100 * tank.max
-                            tank.move_unit_to(WASTE_TANK, tank.level - units_to_keep)
-                            steps.append((tank.name, round(tank.level - units_to_keep, 4), WASTE_TANK.name))
-                        if largest_tank.max - largest_tank.level <= max_blend:
-                            units = get_perc_from_name(tank.name, PARSED_FORMULA) / 100 * largest_tank.max  
-                            tank.move_unit_to(largest_tank, units)
-                            steps.append((tank.name, round(units, 4), largest_tank.name))
-                    max_blend -= largest_tank.max - largest_tank.level
-            else:
-                if max_blend < min(empty_tanks, key=lambda etank: etank.max).max:
-                    return
-                next_process(empty_tanks, largest_tank)
-
-        def optimize_wasted(empty_tanks: list[Tank], wasted_tanks: list[Tank]):
-            if len(empty_tanks) == 0 or len(wasted_tanks) == 0:
-                return
-            largest_empty = get_largest_tank(empty_tanks)
-            max_waste = max(wasted_tanks, key=lambda tank: tank.level)
-            empty_tanks.remove(largest_empty)
-            if largest_empty.max < max_waste.level:
-                max_waste.move_unit_to(largest_empty, largest_empty.max)
-                steps.append((max_waste.name, round(largest_empty.max, 4), largest_empty.name))
-                wasted_tanks.remove(max_waste)
-                optimize_wasted(empty_tanks, wasted_tanks)
-            else:
-                optimize_wasted(empty_tanks, wasted_tanks)
-
-        if max_blend > min(tanks, key=lambda tank: tank.max).max and get_empty_tanks(tanks):
-            process(get_empty_tanks(tanks))
+        if solver.max_blend > min(solver.tanks, key=lambda tank: tank.max).max and get_empty_tanks(solver.tanks):
+            solver.process_formula(get_empty_tanks(solver.tanks))
         else:
             print("IMPOSSIBLE")
             continue
 
-        success_tanks = [tank for tank in tanks if check_tank_formula(tank, PARSED_FORMULA)]
-        empt_tanks = get_empty_tanks(tanks)
-        waste_tanks = set(tanks) - set(success_tanks) - set(empt_tanks)
-        optimize_wasted(empt_tanks, waste_tanks)
+        success_tanks = [tank for tank in solver.tanks if check_tank_formula(tank, solver.parsed_formula)]
+        empt_tanks = get_empty_tanks(solver.tanks)
+        waste_tanks = set(solver.tanks) - set(success_tanks) - set(empt_tanks)
+        solver.optimize_wasted(empt_tanks, waste_tanks)
 
         current_success = sum([tank.level for tank in success_tanks])
-        current_wasted = WASTE_TANK.level + sum([tank.level for tank in tanks if tank.level != 0 and tank.level != tank.max])
-        stats.append((current_success, current_wasted, initial_max))
+        current_wasted = solver.waste_tank.level + sum([tank.level for tank in tanks if tank.level != 0 and tank.level != tank.max])
+        stats.append((current_success, current_wasted, solver.init_max_blend))
 
         print("WASTED:", round(current_wasted, 4))  
-        print("SUCCESS:", round(current_success, 4), "/", round(initial_max, 4), "(theoretical max)", "\n")
+        print("SUCCESS:", round(current_success, 4), "/", round(solver.init_max_blend, 4), "(theoretical max)", "\n")
 
     print("STATS:")
     print("Processed:", len(stats))
