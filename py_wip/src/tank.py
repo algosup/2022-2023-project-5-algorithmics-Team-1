@@ -87,7 +87,7 @@ class Tank():
             else:
                 raise ValueError(f"Not enough space available in tank {target} < {perc*100}% ({self.level * perc}) of {self}.")
 
-        if abs(self.level - self.level * perc) < EPSILON:
+        if not (abso := abs(self.level - self.level * perc)) == 0 and abso  < EPSILON:
             raise ValueError(f"Not enough liquid available in tank {self} < {perc*100}% of {target}.")
 
         for liquid in self.liquids:
