@@ -9,22 +9,25 @@
     display: inline-flex;
 }
 
-.tanklist{
+#tanklist{
     width: 50%;
     height: 100%;
-    background-color: aqua;
+    background-color: rgb(110, 124, 227);
+    overflow-y: scroll;
+    scrollbar-width: thin;
 }
 
-.formula{
+#formula{
     width: 50%;
     height: 100%;
-    background-color: blue;
-
+    background-color: rgb(73, 104, 76);
+    overflow-y: scroll;
+    scrollbar-width: thin;
 }
 .dickbtn{
     width: 100%;
     height: 50%;
-    background-color: red;
+    background-color: rgb(105, 28, 28);
     position: absolute;
     bottom: 0;
 }

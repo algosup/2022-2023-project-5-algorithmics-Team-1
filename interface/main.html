@@ -10,10 +10,52 @@
 </head>
 <body>
     <div class="topline">  
-        <div class="tanklist"></div>
-        <div class="formula"></div>
+        <div id="tanklist">
+            <button onclick="add()"> + </button>
+            <div class="ligne">
+                <label>Tank name : </label><input id ="name" name="Name">
+                <label> Quantity max : </label><input id ="quantity" name="quantitymax">
+                <label> full or not : </label><input id ="full" type="checkbox">
+            </div>
+            <!---console log-->
+        </div>
+        <div id="formula">
+            <button onclick="add2()"> + </button>
+            <div class="ligne1">
+                <label>Tank name : </label><input name="Name">
+                <label>Tank percentage : </label><input name="percentage">
+            </div>
+        </div>
     </div>
-    <div class="dickbtn"></div>
-    
+    <div class="dickbtn">
+        <button onclick="getValue()"> Bite </button>
+    </div>
+    <script>
+        function add(){
+            var list = document.getElementsByClassName("ligne")
+            var test = list[0]
+            var child = test.cloneNode(true)
+            var E1 = document.getElementById("tanklist")
+            E1.appendChild(child)
+        }
+        function add2(){
+            var list = document.getElementsByClassName("ligne1")
+            var test = list[0]
+            var child = test.cloneNode(true)
+            var E1 = document.getElementById("formula")
+            E1.appendChild(child)
+        }
+        function getValue() { 
+            var input = document.getElementsByClassName("ligne").value;
+
+            var value_name = document.getElementById("name").value;
+            var value_maxQuantity = document.getElementById("quantity").value;
+            var value_full = document.getElementById("name").value;
+              
+            console.log(Valuelist(value_name, value_maxQuantity, value_full))
+
+        }
+
+    </script>
 </body>
 </html>
