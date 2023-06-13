@@ -14,7 +14,7 @@
             <button onclick="add()"> + </button>
             <div class="ligne">
                 <label>Tank name : </label><input id ="name" name="Name">
-                <label> Quantity max : </label><input id ="quantity" name="quantitymax">
+                <label> Quantity max : </label><input id ="quantitymax" name="quantitymax">
                 <label> full or not : </label><input id ="full" type="checkbox">
             </div>
             <!---console log-->
@@ -29,9 +29,11 @@
     </div>
     <div class="dickbtn">
         <button onclick="getValue()"> Bite </button>
+        
     </div>
     <script>
         function add(){
+            var cpt = 0
             var list = document.getElementsByClassName("ligne")
             var test = list[0]
             var child = test.cloneNode(true)
@@ -45,13 +47,31 @@
             var E1 = document.getElementById("formula")
             E1.appendChild(child)
         }
+        
+
+        // but : réccupérer les valeurs misent dans les input :
         //function getValue() { 
-        //    var input = document.getElementsByClassName("ligne").value;
-        //    var value_name = document.getElementById("name").value;
-        //    var value_maxQuantity = document.getElementById("quantity").value;
-        //    var value_full = document.getElementById("name").value;
-        //    console.log(Valuelist(value_name, value_maxQuantity, value_full))
-        //}
+        // Valuelist = []
+        // trouver un chemin pour arriver dans la class ligne 
+        // pouvoir récupérer chaque éléments séparément name , quatitymax, checkbox
+        //  value_name -> prend la valeur de name 
+        //  value_maxQuantity -> // de quantitymax
+        //  value_full -> // de full
+        //  append les valeurs dans Valuelist 
+        function getValue() { 
+            Valuelist = []
+            var list = document.getElementsByClassName("ligne");
+
+
+
+
+
+            var value_name = document.getElementById("name").value;
+            var value_maxQuantity = document.getElementById("quantitymax").value;
+            var value_full = document.getElementById("full").value;
+            Valuelist.extend(value_name, value_maxQuantity, value_full)
+            console.log(Valuelist)
+        }
 
     </script>
 </body>
