@@ -10,27 +10,28 @@
 </head>
 <body>
     <div class="topline">  
+        <div class="title"></div>
         <div id="tanklist">
-            
             <div class="ligne">
-                <label>Tank name : </label><input id ="name" name="Name" type="string">
+            <div class="title">TANK LIST</div>
+                <label>Tank Name : </label><input id ="name" name="Name" type="string">
                 <label> Quantity max : </label><input id ="quantitymax" name="quantitymax" type="number">
-                <label> full or not : </label><input id ="full" type="checkbox">
+                <label> Full : </label><input id ="full" type="checkbox">
             </div>
-            <button onclick="add()"> + </button>
+            <button class="sent" onclick="add()"> + </button>
             <!---console log-->
         </div>
         <div id="formula">
-            
+            <div class="title">FORMULA</div>
             <div class="ligne1">
-                <label>Tank name : </label><input name="Name">
-                <label>Tank percentage : </label><input name="percentage" type="number" oninput="validatePercentage(this)">
+                <label>Tank Name : </label><input name="Name">
+                <label>Percentage : </label><input name="percentage" type="number" oninput="validatePercentage(this)">
             </div>
-            <button onclick="add2()"> + </button>
+            <button class="sent2" onclick="add2()"> + </button>
         </div>
     </div>
-    <div class="dickbtn">
-        <button onclick="getValue()"> Bite </button>
+    <div class="submit">
+        <button onclick="getValue()"> Submit </button>
         
     </div>
 </body>
