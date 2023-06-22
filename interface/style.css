@@ -4,7 +4,7 @@
 }
 .topline{
     width: 100%;
-    height: 50%;
+    height: 100%;
     position: absolute;
     display: inline-flex;
 }
@@ -12,24 +12,31 @@
 #tanklist{
     width: 50%;
     height: 100%;
-    background-color: #A58646;
+    background-color: grey;
     overflow-y: scroll;
     scrollbar-width: thin;
+    text-align: center;
 }
 
 #formula{
     width: 50%;
     height: 100%;
-    background-color: #4E142C;
+    background-color: grey;
     overflow-y: scroll;
-    scrollbar-width: thin;
+    scrollbar-width: thin;  
 }
-.dickbtn{
-    width: 100%;
-    height: 50%;
-    background-color: #4D4E22;
+
+
+.submit button{
     position: absolute;
-    bottom: 0;
+    z-index: 1;
+    width: 10%;
+    height: 10%;
+    background-color: black;
+    color: white;
+    border: none;
+    margin-left: 45%;
+    margin-top: 40%;
 }
 
 
@@ -37,4 +44,33 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
+}
+
+.ligne{
+    text-align: center;
+}
+
+.ligne1{
+    text-align: center;
+}
+.title{
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 4%;
+}
+
+.sent{
+    font-size: 30px;
+    margin: 0;
+    font-weight: bold;
+    color: green;
+    margin-top: 2%;
+}
+.sent2{
+    font-size: 30px;
+    margin-left: 47%;
+    font-weight: bold;
+    color: green;
+    margin-top: 2%;
 }

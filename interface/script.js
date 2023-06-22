@@ -16,16 +16,18 @@ function add(){
         label.remove();
     });
 
+    replaceCommas(child.querySelectorAll("input"));
+
     var E1 = document.getElementById("tanklist")
     E1.appendChild(child)
     
 }
+
 function add2(){
     var list = document.getElementsByClassName("ligne1")
     var test = list[0]
     var child = test.cloneNode(true)
     
-
     var removeBtn = document.createElement("button");
     removeBtn.textContent = "Remove";
     removeBtn.addEventListener("click", function() {
@@ -38,10 +40,12 @@ function add2(){
         label.remove();
     });
 
+    replaceCommas(child.querySelectorAll("input"));
+    
     var E1 = document.getElementById("formula")
     E1.appendChild(child)
-}
 
+}
 
 // but : réccupérer les valeurs misent dans les input :
 //function getValue() { 
@@ -52,20 +56,15 @@ function add2(){
 //  value_maxQuantity -> // de quantitymax
 //  value_full -> // de full
 //  append les valeurs dans Valuelist 
-function getValue() { 
-    Valuelist = []
-    var list = document.getElementsByClassName("ligne");
-
-
-
-
-
-    var value_name = document.getElementById("name").value;
-    var value_maxQuantity = document.getElementById("quantitymax").value;
-    var value_full = document.getElementById("full").value;
-    Valuelist.extend(value_name, value_maxQuantity, value_full)
-    console.log(Valuelist)
-}
+// function getValue() { 
+//     Valuelist = []
+//     var list = document.getElementsByClassName("ligne");
+//     var value_name = document.getElementById("name").value;
+//     var value_maxQuantity = document.getElementById("quantitymax").value;
+//     var value_full = document.getElementById("full").value;
+//     Valuelist.extend(value_name, value_maxQuantity, value_full)
+//     console.log(Valuelist)
+// }
 
 
 function validatePercentage(input) {
@@ -75,4 +74,12 @@ function validatePercentage(input) {
     if (isNaN(numberValue) || numberValue > 100) {
       input.value = "";
     }
-  }
+}
+
+function replaceCommas(inputs) {
+    inputs.forEach(function(input) {
+        var value = input.value;
+        var replacedValue = value.replace(/,/g, ".");
+        input.value = replacedValue;
+    });
+}
