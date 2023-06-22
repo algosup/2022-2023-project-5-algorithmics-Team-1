@@ -12,7 +12,7 @@ class Tank():
     -------------
     level: `Decimal`
         The level of the tank.
-    liquids: List[:class:`TeamMember`]
+    liquids: List[:class:`Liquid`]
         The liquids in the tank.
     max: `Decimal`
         The maximum level of the tank.
@@ -24,10 +24,10 @@ class Tank():
         if flevel > fmax:
             raise ValueError(f"Level > Max in Tank {name}.")
 
-        max, level = Dec(fmax), Dec(flevel)
+        level = Dec(flevel)
 
         self.name = name
-        self.max = max
+        self.max = Dec(fmax)
         self.liquids = [Liquid(name, level)] if level else []
 
     @property
