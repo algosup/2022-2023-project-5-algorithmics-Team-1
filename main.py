@@ -1,7 +1,7 @@
 import random
 
 from src.tank import Tank
-from src.utils import check_tank_formula, generate_percentages, get_empty_tanks
+from src.utils import check_tank_formula, generate_percentages, get_empty_tanks, print_steps
 from src.solver import Solver
 
 N_TESTS = 1_000
@@ -56,6 +56,7 @@ if __name__ == "__main__":
 
         print("WASTED:", round(current_wasted, 4))  
         print("SUCCESS:", round(current_success, 4), "/", round(solver.init_max_blend, 4), "(theoretical max)", "\n")
+        print_steps(solver.steps)
 
     print("STATS:")
     print("Processed:", len(stats))
