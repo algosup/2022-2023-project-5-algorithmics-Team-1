@@ -161,3 +161,11 @@ def generate_percentages(num_percentages: int) -> list[Dec]:
         return generate_percentages(num_percentages)
 
     return percentages
+
+
+def print_steps(steps):
+    for step in steps:
+        print(f"{step} <-", end=" ")
+        for tank in steps[step]:
+            print(f"{tank[1]} : {tank[0]},", end=" ")
+        print()
