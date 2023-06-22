@@ -4,7 +4,7 @@ from src.tank import Tank
 from src.utils import check_tank_formula, generate_percentages, get_empty_tanks
 from src.solver import Solver
 
-N_TESTS = 15_000
+N_TESTS = 1_000
 N_START = 1
 
 if __name__ == "__main__":
@@ -47,7 +47,7 @@ if __name__ == "__main__":
 
         success_tanks = [tank for tank in solver.tanks if check_tank_formula(tank, solver.parsed_formula)]
         empt_tanks = get_empty_tanks(solver.tanks)
-        waste_tanks = set(solver.tanks) - set(success_tanks) - set(empt_tanks)
+        waste_tanks = list(set(solver.tanks) - set(success_tanks) - set(empt_tanks))
         solver.optimize_wasted(empt_tanks, waste_tanks)
 
         current_success = sum([tank.level for tank in success_tanks])
@@ -60,5 +60,4 @@ if __name__ == "__main__":
     print("STATS:")
     print("Processed:", len(stats))
     print("Mean success:", round(sum([stat[0] for stat in stats]) / len(stats)), '/', round(sum([stat[2] for stat in stats]) / len(stats)))
-    print("Mean wasted:", round(sum([stat[1] for stat in stats]) / len(stats)))
     print("Not solved cases:", len([1 for stat in stats if stat[0] == 0]))
