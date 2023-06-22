@@ -28,27 +28,27 @@ class Solver():
                     units = get_perc_from_name(tank.name, self.parsed_formula) / 100 * largest_tank.max
                     tank.move_unit_to(largest_tank, units)
                     # self.steps.append((tank.name, round(units, 4), largest_tank.name))
-                    if tank.name not in self.steps:
-                        self.steps[tank.name] = []
-                    self.steps[tank.name].append((round(units, 4), largest_tank.name))
+                    if largest_tank.name not in self.steps:
+                        self.steps[largest_tank.name] = []
+                    self.steps[largest_tank.name].append((round(units, 4), tank.name))
                 self.max_blend -= largest_tank.max
                 self.to_next_process(empty_tanks, largest_tank)
             else:
                 for tank in self.tanks_formula: # get largest tank <= max_blend
                     if tank == largest_tank:
                         units_to_keep = get_perc_from_name(tank.name, self.parsed_formula) / 100 * tank.max
+                        if self.waste_tank.name not in self.steps:
+                            self.steps[self.waste_tank.name] = []
+                        self.steps[self.waste_tank.name].append((round(tank.level - units_to_keep, 4), tank.name))
                         tank.move_unit_to(self.waste_tank, tank.level - units_to_keep)
                         # self.steps.append((tank.name, round(tank.level - units_to_keep, 4), self.waste_tank.name))
-                        if tank.name not in self.steps:
-                            self.steps[tank.name] = []
-                        self.steps[tank.name].append((round(tank.level - units_to_keep, 4), self.waste_tank.name))
                     if largest_tank.max - largest_tank.level <= self.max_blend:
                         units = get_perc_from_name(tank.name, self.parsed_formula) / 100 * largest_tank.max  
                         tank.move_unit_to(largest_tank, units)
                         # self.steps.append((tank.name, round(units, 4), largest_tank.name))
-                        if tank.name not in self.steps:
-                            self.steps[tank.name] = []
-                        self.steps[tank.name].append((round(units, 4), largest_tank.name))
+                        if largest_tank.name not in self.steps:
+                            self.steps[largest_tank.name] = []
+                        self.steps[largest_tank.name].append((round(units, 4), tank.name))
                 self.max_blend -= largest_tank.max - largest_tank.level
         else:
             if self.max_blend < min(empty_tanks, key=lambda etank: etank.max).max:
@@ -64,9 +64,9 @@ class Solver():
         if largest_empty.max < max_waste.level:
             max_waste.move_unit_to(largest_empty, largest_empty.max)
             # self.steps.append((max_waste.name, round(largest_empty.max, 4), largest_empty.name))
-            if max_waste.name not in self.steps:
-                self.steps[max_waste.name] = []
-            self.steps[max_waste.name].append((round(largest_empty.max, 4), largest_empty.name))
+            if largest_empty.name not in self.steps:
+                self.steps[largest_empty.name] = []
+            self.steps[largest_empty.name].append((round(largest_empty.max, 4), max_waste.name))
             wasted_tanks.remove(max_waste)
             self.optimize_wasted(empty_tanks, wasted_tanks)
         else:
