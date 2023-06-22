@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="topline">  
+        <div class="title"></div>
+        <div id="tanklist">
+            <div class="ligne">
+            <div class="title">TANK LIST</div>
+                <label>Tank Name : </label><input id ="name" name="Name" type="string">
+                <label> Quantity max : </label><input id ="quantitymax" name="quantitymax" type="number">
+                <label> Full : </label><input id ="full" type="checkbox">
+            </div>
+            <button class="sent" onclick="add()"> + </button>
+            <!---console log-->
+        </div>
+        <div id="formula">
+            <div class="title">FORMULA</div>
+            <div class="ligne1">
+                <label>Tank Name : </label><input name="Name">
+                <label>Percentage : </label><input name="percentage" type="number" oninput="validatePercentage(this)">
+            </div>
+            <button class="sent2" onclick="add2()"> + </button>
+        </div>
+    </div>
+    <div class="submit">
+        <button onclick="getValue()"> Submit </button>
+        
+    </div>
+</body>
+</html>
